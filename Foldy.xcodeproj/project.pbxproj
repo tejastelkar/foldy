@@ -1,0 +1,624 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		031536FC290137B356D01F24 /* FoldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91E57D098561316BCE1C9EAB /* FoldState.swift */; };
+		04129D2637CE8D016B3E658E /* FoldStateMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0544CEDF1A5DB688236806FF /* FoldStateMapperTests.swift */; };
+		0877038881864DD4D4501B83 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39BAC286E01EC4A266E9D70C /* AppModel.swift */; };
+		0A1CF4E1D6B50F5CF6FDFDF1 /* OverlayCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BA732E48E6D49B25C71CF5F /* OverlayCoordinator.swift */; };
+		216FFEA5A30860997FF87D66 /* FoldRenderParametersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF75F1D01D43A652B3CD65E /* FoldRenderParametersTests.swift */; };
+		262CA8B27F818BAEE8951DDD /* AppSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36CA41012B0C2A8F751C36F /* AppSettingsTests.swift */; };
+		295415AF8200D28280435182 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFE8E0A6C7C4A556030341B /* AppSettings.swift */; };
+		3147E878C2A84B392AC64914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01492DF0BAA7A4504425723 /* Assets.xcassets */; };
+		31BB2BC5AD3EFB181F297367 /* FoldStateMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7001812323272358DFA6C /* FoldStateMapper.swift */; };
+		34E6DCE6A32DD7F80B9B2496 /* HIDAngleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835B2EE7FC2C19E611321C78 /* HIDAngleProvider.swift */; };
+		370FEFA34E11D516A2DAB513 /* FoldyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658E38A0D908856C6EEBCE3 /* FoldyApp.swift */; };
+		3A1C727405EF18EE6DB21595 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4028A97560D06411D88B9AC6 /* OnboardingView.swift */; };
+		4E95D8EED3009C6C2196EBFC /* ScreenCaptureServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20534E1CB98F9BC199879283 /* ScreenCaptureServicing.swift */; };
+		4EF0DCB40237E718BB0F729F /* AngleSmootherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF976B5FCC3C8ADDEFF3675B /* AngleSmootherTests.swift */; };
+		4FD488972BCA23F9C6C83A2F /* FoldRenderParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B69CAD94DCC4389D620F27 /* FoldRenderParameters.swift */; };
+		62B244E816246BE14EE379FB /* OverlaySafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAB6E7B8F0284E338991BE9 /* OverlaySafetyTests.swift */; };
+		6307F1EBFBF6B97047494BAB /* FoldMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94D571F4D5A71B7B6981CEC /* FoldMetalView.swift */; };
+		655E704179EA112209CC4BCE /* HIDReportParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D144F6723AD52E285376A3C0 /* HIDReportParser.swift */; };
+		6BC9C4359C1AB7B3205367FB /* AngleSmoother.swift in Sources */ = {isa = PBXBuildFile; fileRef = E580DB786E32EE5DF185D2F2 /* AngleSmoother.swift */; };
+		6C3501D99DCF5AEFCC9A3C0A /* PreviewAngleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409301E4A79963D640B1906D /* PreviewAngleProvider.swift */; };
+		709C7448878FE35FEA47FFBA /* FoldRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F926B8AD5178B63E8929BB4F /* FoldRenderer.swift */; };
+		784079A0F5CADBFF8A5E9944 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51067E37FEF517A972200B58 /* AppDelegate.swift */; };
+		8942EC25A22B624C77D3E0E6 /* LaunchAtLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA873A69DDB292CA18664E87 /* LaunchAtLoginService.swift */; };
+		8B18E25A79E6ADBADED3D47C /* PreviewAngleProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C66C54462A652C3F6263C /* PreviewAngleProviderTests.swift */; };
+		AA81850196E064E623FF4AEB /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C8A09803DCD986F5AA8E94 /* AppModelTests.swift */; };
+		AB12DA9ABDC56DFD26319985 /* OverlayCoordinating.swift in Sources */ = {isa = PBXBuildFile; fileRef = A57B8330BAD179278E55F82A /* OverlayCoordinating.swift */; };
+		B816575BA146C2FE8E914C47 /* SettingsRootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E10B804B625EF35932BDDDF /* SettingsRootView.swift */; };
+		C62F79168A3EB68F2251FDAD /* LidAngleProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 379B39D5A413A9EAC9121089 /* LidAngleProviding.swift */; };
+		CFB89645A43A752B7FB3F929 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF9DE7AE40AD9E6BCEC9C4F /* MenuBarContentView.swift */; };
+		D7E962CBA1C69DD02D97A4B0 /* HIDReportParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9230AD9FF0ACFE21D28B91B0 /* HIDReportParserTests.swift */; };
+		E49063491C99D8372B4439A1 /* FoldAppearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE97B0E1C88B25F73DE9BD17 /* FoldAppearance.swift */; };
+		E93587C0DDF38EF02B976F73 /* ScreenCaptureService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8AF25CBFAB9BE89B528B5B7E /* ScreenCaptureService.swift */; };
+		F96F57347F90B84751615832 /* PreviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12171A6561322C98B5674B99 /* PreviewView.swift */; };
+		FE642174E1046E3A0870B243 /* EffectSafetyController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E479D4563E338817C1234DE2 /* EffectSafetyController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		5CE4F928648273148EA53BE7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C9A6314A99501F1AEE095084 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 82B67E32A7DE77AA7E2F356C;
+			remoteInfo = Foldy;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		0544CEDF1A5DB688236806FF /* FoldStateMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldStateMapperTests.swift; sourceTree = "<group>"; };
+		0DAB6E7B8F0284E338991BE9 /* OverlaySafetyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlaySafetyTests.swift; sourceTree = "<group>"; };
+		12171A6561322C98B5674B99 /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
+		17E53DC45B6F359CA40C7244 /* Foldy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Foldy.entitlements; sourceTree = "<group>"; };
+		20534E1CB98F9BC199879283 /* ScreenCaptureServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureServicing.swift; sourceTree = "<group>"; };
+		26B69CAD94DCC4389D620F27 /* FoldRenderParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldRenderParameters.swift; sourceTree = "<group>"; };
+		379B39D5A413A9EAC9121089 /* LidAngleProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidAngleProviding.swift; sourceTree = "<group>"; };
+		39BAC286E01EC4A266E9D70C /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		3BF9DE7AE40AD9E6BCEC9C4F /* MenuBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContentView.swift; sourceTree = "<group>"; };
+		4028A97560D06411D88B9AC6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		409301E4A79963D640B1906D /* PreviewAngleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProvider.swift; sourceTree = "<group>"; };
+		51067E37FEF517A972200B58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		5E10B804B625EF35932BDDDF /* SettingsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootView.swift; sourceTree = "<group>"; };
+		835B2EE7FC2C19E611321C78 /* HIDAngleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDAngleProvider.swift; sourceTree = "<group>"; };
+		8AF25CBFAB9BE89B528B5B7E /* ScreenCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureService.swift; sourceTree = "<group>"; };
+		90C8A09803DCD986F5AA8E94 /* AppModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelTests.swift; sourceTree = "<group>"; };
+		91E57D098561316BCE1C9EAB /* FoldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldState.swift; sourceTree = "<group>"; };
+		9230AD9FF0ACFE21D28B91B0 /* HIDReportParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDReportParserTests.swift; sourceTree = "<group>"; };
+		9BA732E48E6D49B25C71CF5F /* OverlayCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayCoordinator.swift; sourceTree = "<group>"; };
+		A57B8330BAD179278E55F82A /* OverlayCoordinating.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayCoordinating.swift; sourceTree = "<group>"; };
+		AA873A69DDB292CA18664E87 /* LaunchAtLoginService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchAtLoginService.swift; sourceTree = "<group>"; };
+		AAAD192AFF95801140B9B003 /* FoldyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = FoldyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		AAFE8E0A6C7C4A556030341B /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		AE8C66C54462A652C3F6263C /* PreviewAngleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProviderTests.swift; sourceTree = "<group>"; };
+		AE97B0E1C88B25F73DE9BD17 /* FoldAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldAppearance.swift; sourceTree = "<group>"; };
+		C3FDF4BF8D42AF96920FCA64 /* Foldy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foldy.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		C94D571F4D5A71B7B6981CEC /* FoldMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldMetalView.swift; sourceTree = "<group>"; };
+		D01492DF0BAA7A4504425723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D144F6723AD52E285376A3C0 /* HIDReportParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDReportParser.swift; sourceTree = "<group>"; };
+		D36CA41012B0C2A8F751C36F /* AppSettingsTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsTests.swift; sourceTree = "<group>"; };
+		DEF75F1D01D43A652B3CD65E /* FoldRenderParametersTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldRenderParametersTests.swift; sourceTree = "<group>"; };
+		DF976B5FCC3C8ADDEFF3675B /* AngleSmootherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleSmootherTests.swift; sourceTree = "<group>"; };
+		E1E7001812323272358DFA6C /* FoldStateMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldStateMapper.swift; sourceTree = "<group>"; };
+		E479D4563E338817C1234DE2 /* EffectSafetyController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EffectSafetyController.swift; sourceTree = "<group>"; };
+		E580DB786E32EE5DF185D2F2 /* AngleSmoother.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleSmoother.swift; sourceTree = "<group>"; };
+		F658E38A0D908856C6EEBCE3 /* FoldyApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldyApp.swift; sourceTree = "<group>"; };
+		F926B8AD5178B63E8929BB4F /* FoldRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldRenderer.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0A8AFE175A001E05A78F9F6F /* Capture */ = {
+			isa = PBXGroup;
+			children = (
+				8AF25CBFAB9BE89B528B5B7E /* ScreenCaptureService.swift */,
+				20534E1CB98F9BC199879283 /* ScreenCaptureServicing.swift */,
+			);
+			path = Capture;
+			sourceTree = "<group>";
+		};
+		1FF6E1D63755A1FE5387118B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C3FDF4BF8D42AF96920FCA64 /* Foldy.app */,
+				AAAD192AFF95801140B9B003 /* FoldyTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		3F889B9E4CF7B03D9610DAD2 /* Foldy */ = {
+			isa = PBXGroup;
+			children = (
+				17E53DC45B6F359CA40C7244 /* Foldy.entitlements */,
+				E0BA2087ED86E7679FF08F9B /* App */,
+				0A8AFE175A001E05A78F9F6F /* Capture */,
+				B953796607A0CE43ECEC02ED /* Domain */,
+				DDB07B734B3677DFE2A15E9C /* Overlay */,
+				7602DF6A610DC411D4FF15C1 /* Rendering */,
+				FA78BCE9077CAD45FF9BF655 /* Resources */,
+				946C574EFCCB9596EDAA7FBB /* Sensor */,
+				85D61FE65A4191FBF261505A /* Settings */,
+				C4477CC94A9BAD1CF1012220 /* UI */,
+			);
+			path = Foldy;
+			sourceTree = "<group>";
+		};
+		6E33CD01F981E52A85E5D13A = {
+			isa = PBXGroup;
+			children = (
+				3F889B9E4CF7B03D9610DAD2 /* Foldy */,
+				749649DEE84F3CCAB14F842C /* FoldyTests */,
+				1FF6E1D63755A1FE5387118B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		749649DEE84F3CCAB14F842C /* FoldyTests */ = {
+			isa = PBXGroup;
+			children = (
+				DF976B5FCC3C8ADDEFF3675B /* AngleSmootherTests.swift */,
+				90C8A09803DCD986F5AA8E94 /* AppModelTests.swift */,
+				D36CA41012B0C2A8F751C36F /* AppSettingsTests.swift */,
+				DEF75F1D01D43A652B3CD65E /* FoldRenderParametersTests.swift */,
+				0544CEDF1A5DB688236806FF /* FoldStateMapperTests.swift */,
+				9230AD9FF0ACFE21D28B91B0 /* HIDReportParserTests.swift */,
+				0DAB6E7B8F0284E338991BE9 /* OverlaySafetyTests.swift */,
+				AE8C66C54462A652C3F6263C /* PreviewAngleProviderTests.swift */,
+			);
+			path = FoldyTests;
+			sourceTree = "<group>";
+		};
+		7602DF6A610DC411D4FF15C1 /* Rendering */ = {
+			isa = PBXGroup;
+			children = (
+				F926B8AD5178B63E8929BB4F /* FoldRenderer.swift */,
+				26B69CAD94DCC4389D620F27 /* FoldRenderParameters.swift */,
+			);
+			path = Rendering;
+			sourceTree = "<group>";
+		};
+		85D61FE65A4191FBF261505A /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				AAFE8E0A6C7C4A556030341B /* AppSettings.swift */,
+				AE97B0E1C88B25F73DE9BD17 /* FoldAppearance.swift */,
+				AA873A69DDB292CA18664E87 /* LaunchAtLoginService.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		946C574EFCCB9596EDAA7FBB /* Sensor */ = {
+			isa = PBXGroup;
+			children = (
+				E580DB786E32EE5DF185D2F2 /* AngleSmoother.swift */,
+				835B2EE7FC2C19E611321C78 /* HIDAngleProvider.swift */,
+				D144F6723AD52E285376A3C0 /* HIDReportParser.swift */,
+				379B39D5A413A9EAC9121089 /* LidAngleProviding.swift */,
+				409301E4A79963D640B1906D /* PreviewAngleProvider.swift */,
+			);
+			path = Sensor;
+			sourceTree = "<group>";
+		};
+		B953796607A0CE43ECEC02ED /* Domain */ = {
+			isa = PBXGroup;
+			children = (
+				E479D4563E338817C1234DE2 /* EffectSafetyController.swift */,
+				91E57D098561316BCE1C9EAB /* FoldState.swift */,
+				E1E7001812323272358DFA6C /* FoldStateMapper.swift */,
+			);
+			path = Domain;
+			sourceTree = "<group>";
+		};
+		C4477CC94A9BAD1CF1012220 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3BF9DE7AE40AD9E6BCEC9C4F /* MenuBarContentView.swift */,
+				4028A97560D06411D88B9AC6 /* OnboardingView.swift */,
+				12171A6561322C98B5674B99 /* PreviewView.swift */,
+				C69E5C0D76C3D7566080DFD4 /* Settings */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		C69E5C0D76C3D7566080DFD4 /* Settings */ = {
+			isa = PBXGroup;
+			children = (
+				5E10B804B625EF35932BDDDF /* SettingsRootView.swift */,
+			);
+			path = Settings;
+			sourceTree = "<group>";
+		};
+		DDB07B734B3677DFE2A15E9C /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				C94D571F4D5A71B7B6981CEC /* FoldMetalView.swift */,
+				A57B8330BAD179278E55F82A /* OverlayCoordinating.swift */,
+				9BA732E48E6D49B25C71CF5F /* OverlayCoordinator.swift */,
+			);
+			path = Overlay;
+			sourceTree = "<group>";
+		};
+		E0BA2087ED86E7679FF08F9B /* App */ = {
+			isa = PBXGroup;
+			children = (
+				51067E37FEF517A972200B58 /* AppDelegate.swift */,
+				39BAC286E01EC4A266E9D70C /* AppModel.swift */,
+				F658E38A0D908856C6EEBCE3 /* FoldyApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		FA78BCE9077CAD45FF9BF655 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D01492DF0BAA7A4504425723 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		82B67E32A7DE77AA7E2F356C /* Foldy */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = EB5F00F2C569A010E11BD934 /* Build configuration list for PBXNativeTarget "Foldy" */;
+			buildPhases = (
+				487BA1F451104CB7326E718E /* Sources */,
+				13DCBB8C8D2BAA058D5D4DF4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Foldy;
+			packageProductDependencies = (
+			);
+			productName = Foldy;
+			productReference = C3FDF4BF8D42AF96920FCA64 /* Foldy.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C7EF4A1E8F4A1A5F3D9F3931 /* FoldyTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 46C370094E46425AD40C5899 /* Build configuration list for PBXNativeTarget "FoldyTests" */;
+			buildPhases = (
+				D0AF4902E52907C360E9CFF2 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0439247BFE98F41A36A84806 /* PBXTargetDependency */,
+			);
+			name = FoldyTests;
+			packageProductDependencies = (
+			);
+			productName = FoldyTests;
+			productReference = AAAD192AFF95801140B9B003 /* FoldyTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C9A6314A99501F1AEE095084 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					82B67E32A7DE77AA7E2F356C = {
+						ProvisioningStyle = Automatic;
+					};
+					C7EF4A1E8F4A1A5F3D9F3931 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 71C4DDB6424499323406CAB5 /* Build configuration list for PBXProject "Foldy" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 6E33CD01F981E52A85E5D13A;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 1FF6E1D63755A1FE5387118B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				82B67E32A7DE77AA7E2F356C /* Foldy */,
+				C7EF4A1E8F4A1A5F3D9F3931 /* FoldyTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		13DCBB8C8D2BAA058D5D4DF4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3147E878C2A84B392AC64914 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		487BA1F451104CB7326E718E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				6BC9C4359C1AB7B3205367FB /* AngleSmoother.swift in Sources */,
+				784079A0F5CADBFF8A5E9944 /* AppDelegate.swift in Sources */,
+				0877038881864DD4D4501B83 /* AppModel.swift in Sources */,
+				295415AF8200D28280435182 /* AppSettings.swift in Sources */,
+				FE642174E1046E3A0870B243 /* EffectSafetyController.swift in Sources */,
+				E49063491C99D8372B4439A1 /* FoldAppearance.swift in Sources */,
+				6307F1EBFBF6B97047494BAB /* FoldMetalView.swift in Sources */,
+				4FD488972BCA23F9C6C83A2F /* FoldRenderParameters.swift in Sources */,
+				709C7448878FE35FEA47FFBA /* FoldRenderer.swift in Sources */,
+				031536FC290137B356D01F24 /* FoldState.swift in Sources */,
+				31BB2BC5AD3EFB181F297367 /* FoldStateMapper.swift in Sources */,
+				370FEFA34E11D516A2DAB513 /* FoldyApp.swift in Sources */,
+				34E6DCE6A32DD7F80B9B2496 /* HIDAngleProvider.swift in Sources */,
+				655E704179EA112209CC4BCE /* HIDReportParser.swift in Sources */,
+				8942EC25A22B624C77D3E0E6 /* LaunchAtLoginService.swift in Sources */,
+				C62F79168A3EB68F2251FDAD /* LidAngleProviding.swift in Sources */,
+				CFB89645A43A752B7FB3F929 /* MenuBarContentView.swift in Sources */,
+				3A1C727405EF18EE6DB21595 /* OnboardingView.swift in Sources */,
+				AB12DA9ABDC56DFD26319985 /* OverlayCoordinating.swift in Sources */,
+				0A1CF4E1D6B50F5CF6FDFDF1 /* OverlayCoordinator.swift in Sources */,
+				6C3501D99DCF5AEFCC9A3C0A /* PreviewAngleProvider.swift in Sources */,
+				F96F57347F90B84751615832 /* PreviewView.swift in Sources */,
+				E93587C0DDF38EF02B976F73 /* ScreenCaptureService.swift in Sources */,
+				4E95D8EED3009C6C2196EBFC /* ScreenCaptureServicing.swift in Sources */,
+				B816575BA146C2FE8E914C47 /* SettingsRootView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D0AF4902E52907C360E9CFF2 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4EF0DCB40237E718BB0F729F /* AngleSmootherTests.swift in Sources */,
+				AA81850196E064E623FF4AEB /* AppModelTests.swift in Sources */,
+				262CA8B27F818BAEE8951DDD /* AppSettingsTests.swift in Sources */,
+				216FFEA5A30860997FF87D66 /* FoldRenderParametersTests.swift in Sources */,
+				04129D2637CE8D016B3E658E /* FoldStateMapperTests.swift in Sources */,
+				D7E962CBA1C69DD02D97A4B0 /* HIDReportParserTests.swift in Sources */,
+				62B244E816246BE14EE379FB /* OverlaySafetyTests.swift in Sources */,
+				8B18E25A79E6ADBADED3D47C /* PreviewAngleProviderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		0439247BFE98F41A36A84806 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 82B67E32A7DE77AA7E2F356C /* Foldy */;
+			targetProxy = 5CE4F928648273148EA53BE7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		1AD679765B016C328E1DB5AB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		31EB3EDDA7AD44AA3905E63A /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.foldy.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Foldy.app/Contents/MacOS/Foldy";
+			};
+			name = Release;
+		};
+		5296ECD8432FCC7849AF8DA4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Foldy/Foldy.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Foldy;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSScreenCaptureUsageDescription = "Foldy captures your desktop only while rendering the fold effect. Frames stay on your Mac and are never saved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.foldy.app;
+				PRODUCT_NAME = Foldy;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		816584A2B49E5C5BA4A3DE75 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		F144D3CF34440219340387CF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.foldy.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Foldy.app/Contents/MacOS/Foldy";
+			};
+			name = Debug;
+		};
+		F8A36EFE6F10A55D3508EA2C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Foldy/Foldy.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Foldy;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSScreenCaptureUsageDescription = "Foldy captures your desktop only while rendering the fold effect. Frames stay on your Mac and are never saved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.foldy.app;
+				PRODUCT_NAME = Foldy;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		46C370094E46425AD40C5899 /* Build configuration list for PBXNativeTarget "FoldyTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F144D3CF34440219340387CF /* Debug */,
+				31EB3EDDA7AD44AA3905E63A /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		71C4DDB6424499323406CAB5 /* Build configuration list for PBXProject "Foldy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1AD679765B016C328E1DB5AB /* Debug */,
+				816584A2B49E5C5BA4A3DE75 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		EB5F00F2C569A010E11BD934 /* Build configuration list for PBXNativeTarget "Foldy" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				5296ECD8432FCC7849AF8DA4 /* Debug */,
+				F8A36EFE6F10A55D3508EA2C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C9A6314A99501F1AEE095084 /* Project object */;
+}

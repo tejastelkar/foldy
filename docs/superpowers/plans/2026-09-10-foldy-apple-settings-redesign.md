@@ -4,7 +4,7 @@
 
 **Goal:** Ship a fully Foldy-branded macOS menu-bar app with a native Apple-style Settings window and renderer-connected appearance controls.
 
-**Architecture:** Persist typed appearance preferences in `AppSettings`, expose them as an immutable `FoldAppearance` snapshot, and pass that snapshot through preview and overlay views into Metal render parameters. Keep the HID-to-fold mapping and safety controller intact while renaming the app, targets, modules, packaging, and documentation from LidBend to Foldy.
+**Architecture:** Persist typed appearance preferences in `AppSettings`, expose them as an immutable `FoldAppearance` snapshot, and pass that snapshot through preview and overlay views into Metal render parameters. Keep the HID-to-fold mapping and safety controller intact while renaming the app, targets, modules, packaging, and documentation from Foldy to Foldy.
 
 **Tech Stack:** Swift 6, SwiftUI, AppKit, MetalKit, ScreenCaptureKit, IOKit HID, XCTest, XcodeGen.
 
@@ -25,9 +25,9 @@
 ### Task 1: Typed appearance preferences
 
 **Files:**
-- Create: `LidBend/Settings/FoldAppearance.swift` (renamed with the source tree in Task 2)
-- Modify: `LidBend/Settings/AppSettings.swift`
-- Test: `LidBendTests/AppSettingsTests.swift`
+- Create: `Foldy/Settings/FoldAppearance.swift` (renamed with the source tree in Task 2)
+- Modify: `Foldy/Settings/AppSettings.swift`
+- Test: `FoldyTests/AppSettingsTests.swift`
 
 **Interfaces:**
 - Produces: `enum FoldStyle: String, CaseIterable, Codable, Sendable`
@@ -53,7 +53,7 @@ func testFreshInstallUsesSilkAppearanceDefaults() {
 
 - [ ] **Step 2: Run the focused tests and verify RED**
 
-Run the existing `LidBendTests` target. The expected failure is missing `appearanceStyle`, `followLid`, `perspective`, `variableBlur`, `shadow`, and `clearAngle` members.
+Run the existing `FoldyTests` target. The expected failure is missing `appearanceStyle`, `followLid`, `perspective`, `variableBlur`, `shadow`, and `clearAngle` members.
 
 - [ ] **Step 3: Implement the model and persisted settings**
 
@@ -81,17 +81,17 @@ Expected: all `AppSettingsTests` pass with no failures.
 - [ ] **Step 5: Commit**
 
 ```bash
-git add LidBend/Settings LidBendTests/AppSettingsTests.swift
+git add Foldy/Settings FoldyTests/AppSettingsTests.swift
 git commit -m "feat: add Foldy appearance preferences"
 ```
 
 ### Task 2: Complete Foldy rename and remove obsolete licensing
 
 **Files:**
-- Rename: `LidBend/` to `Foldy/`
-- Rename: `LidBendTests/` to `FoldyTests/`
-- Rename: `Foldy/App/LidBendApp.swift` to `Foldy/App/FoldyApp.swift`
-- Rename: `Foldy/LidBend.entitlements` to `Foldy/Foldy.entitlements`
+- Rename: `Foldy/` to `Foldy/`
+- Rename: `FoldyTests/` to `FoldyTests/`
+- Rename: `Foldy/App/FoldyApp.swift` to `Foldy/App/FoldyApp.swift`
+- Rename: `Foldy/Foldy.entitlements` to `Foldy/Foldy.entitlements`
 - Delete: `Foldy/Entitlement/`
 - Delete: `FoldyTests/EntitlementStoreTests.swift`
 - Delete: `Config/`
@@ -109,7 +109,7 @@ Use filesystem moves so Git records history, then update `@main struct FoldyApp`
 
 - [ ] **Step 2: Remove dormant licensing code and old generated project**
 
-Delete only the unused entitlement source/tests, example payment configuration, and `LidBend.xcodeproj`. Generate `Foldy.xcodeproj` with `xcodegen generate`.
+Delete only the unused entitlement source/tests, example payment configuration, and `Foldy.xcodeproj`. Generate `Foldy.xcodeproj` with `xcodegen generate`.
 
 - [ ] **Step 3: Run a clean build to verify the rename**
 
@@ -123,7 +123,7 @@ Expected: `BUILD SUCCEEDED` and product path ending in `Foldy.app`.
 
 - [ ] **Step 4: Scan current source for obsolete branding**
 
-Run `rg -n -i 'lidbend' --glob '!docs/superpowers/**' --glob '!.git/**' --glob '!build/**' .` and update every result. The command must return no current product-code matches.
+Run `rg -n -i 'foldy' --glob '!docs/superpowers/**' --glob '!.git/**' --glob '!build/**' .` and update every result. The command must return no current product-code matches.
 
 - [ ] **Step 5: Commit**
 
@@ -321,7 +321,7 @@ Launch the packaged app with the preview/settings route. Check the Apple-blue si
 
 - [ ] **Step 6: Enforce branding acceptance**
 
-Run `rg -n -i 'lidbend' --glob '!docs/superpowers/specs/2026-09-10-lidbend-design.md' --glob '!docs/superpowers/plans/2026-09-10-lidbend-implementation.md' --glob '!.git/**' --glob '!build/**' .`. Rename the historical documents to Foldy and update their content if any current-source matches remain.
+Run `rg -n -i 'foldy' --glob '!docs/superpowers/specs/2026-09-10-foldy-design.md' --glob '!docs/superpowers/plans/2026-09-10-foldy-implementation.md' --glob '!.git/**' --glob '!build/**' .`. Rename the historical documents to Foldy and update their content if any current-source matches remain.
 
 - [ ] **Step 7: Commit and push main**
 

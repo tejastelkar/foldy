@@ -6,7 +6,7 @@ import ImageIO
 import UniformTypeIdentifiers
 
 let root = URL(fileURLWithPath: FileManager.default.currentDirectoryPath)
-let output = root.appendingPathComponent("LidBend/Resources/Assets.xcassets/AppIcon.appiconset")
+let output = root.appendingPathComponent("Foldy/Resources/Assets.xcassets/AppIcon.appiconset")
 try FileManager.default.createDirectory(at: output, withIntermediateDirectories: true)
 
 func panelPath(in rect: CGRect, left: Bool) -> CGPath {
@@ -106,4 +106,4 @@ for size in [16, 32, 64, 128, 256, 512, 1024] {
     try drawIcon(size: size)
 }
 
-print("Generated LidBend icons in \(output.path)")
+print("Generated Foldy icons in \(output.path)")

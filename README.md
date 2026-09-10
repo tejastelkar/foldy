@@ -1,8 +1,8 @@
-# LidBend
+# Foldy
 
-LidBend is a native macOS menu-bar app that makes the live desktop tilt, blur, crease, and settle as a compatible MacBook lid closes. It includes a manual preview for unsupported hardware and visual testing.
+Foldy is a native macOS menu-bar app that makes the live desktop tilt, blur, crease, and settle as a compatible MacBook lid closes. It includes a manual preview for unsupported hardware and visual testing.
 
-LidBend is independent software. It is not affiliated with Apple or the Bendy product.
+Foldy is independent software. It is not affiliated with Apple or the Bendy product.
 
 ## Requirements
 
@@ -19,20 +19,20 @@ Unsupported Macs can run the complete manual preview.
 ```bash
 export DEVELOPER_DIR=/Applications/Xcode.app/Contents/Developer
 xcodegen generate
-xcodebuild build -project LidBend.xcodeproj -scheme LidBend -destination 'platform=macOS' -derivedDataPath build/DebugData CODE_SIGNING_ALLOWED=NO
-open build/DebugData/Build/Products/Debug/LidBend.app
+xcodebuild build -project Foldy.xcodeproj -scheme Foldy -destination 'platform=macOS' -derivedDataPath build/DebugData CODE_SIGNING_ALLOWED=NO
+open build/DebugData/Build/Products/Debug/Foldy.app
 ```
 
 Open the menu-bar MacBook icon, choose **Setup & privacy**, and grant Screen Recording. Turn on **Enable lid effect**, then lower the lid. Choose **Preview effect** to test without moving the lid.
 
 ## Privacy and safety
 
-ScreenCaptureKit frames remain in memory and are sent directly to Metal. LidBend does not save screenshots, transmit frames or sensor readings, include analytics, prevent sleep, or modify system lid behavior. The overlay is click-through and automatically disappears when the sensor stream becomes stale or invalid.
+ScreenCaptureKit frames remain in memory and are sent directly to Metal. Foldy does not save screenshots, transmit frames or sensor readings, include analytics, prevent sleep, or modify system lid behavior. The overlay is click-through and automatically disappears when the sensor stream becomes stale or invalid.
 
 ## Tests
 
 ```bash
-xcodebuild test -project LidBend.xcodeproj -scheme LidBend -destination 'platform=macOS' -derivedDataPath build/TestData CODE_SIGNING_ALLOWED=NO
+xcodebuild test -project Foldy.xcodeproj -scheme Foldy -destination 'platform=macOS' -derivedDataPath build/TestData CODE_SIGNING_ALLOWED=NO
 ```
 
 ## Package
@@ -41,11 +41,7 @@ xcodebuild test -project LidBend.xcodeproj -scheme LidBend -destination 'platfor
 ./scripts/package.sh
 ```
 
-Without credentials, packaging creates an unsigned local `build/LidBend.app` and `build/LidBend.dmg`. If macOS's disk-image service is unavailable, it falls back to `build/LidBend.zip`. For commercial distribution, install a Developer ID Application certificate and set `CODE_SIGN_IDENTITY`, `DEVELOPMENT_TEAM`, and optionally `NOTARY_PROFILE` in the environment. The script signs with the hardened runtime and notarizes when those values are present.
-
-## $1.99 lifetime license
-
-`DirectLicenseStore` validates Ed25519-signed license documents for product `lidbend-lifetime`; the private signing key never belongs in the app. Copy `Config/Secrets.example.xcconfig` to the ignored `Config/Secrets.xcconfig` and connect the checkout/customer portal from your payment provider. A production checkout cannot be activated until the repository owner supplies that provider account and public verification key.
+Without credentials, packaging creates an unsigned local `build/Foldy.app` and `build/Foldy.dmg`. If macOS's disk-image service is unavailable, it falls back to `build/Foldy.zip`. For commercial distribution, install a Developer ID Application certificate and set `CODE_SIGN_IDENTITY`, `DEVELOPMENT_TEAM`, and optionally `NOTARY_PROFILE` in the environment. The script signs with the hardened runtime and notarizes when those values are present.
 
 ## Sensor implementation
 

@@ -1,4 +1,4 @@
-name: LidBend
+name: Foldy
 options:
   createIntermediateGroups: true
   deploymentTarget:
@@ -9,42 +9,42 @@ settings:
     ARCHS: arm64
     CODE_SIGN_STYLE: Automatic
 targets:
-  LidBend:
+  Foldy:
     type: application
     platform: macOS
     sources:
-      - path: LidBend
+      - path: Foldy
         excludes:
           - Rendering/FoldShaders.metal
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.lidbend.app
-        PRODUCT_NAME: LidBend
+        PRODUCT_BUNDLE_IDENTIFIER: com.foldy.app
+        PRODUCT_NAME: Foldy
         GENERATE_INFOPLIST_FILE: YES
         INFOPLIST_KEY_LSUIElement: YES
-        INFOPLIST_KEY_CFBundleDisplayName: LidBend
+        INFOPLIST_KEY_CFBundleDisplayName: Foldy
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.entertainment
-        INFOPLIST_KEY_NSScreenCaptureUsageDescription: LidBend captures your desktop only while rendering the fold effect. Frames stay on your Mac and are never saved.
+        INFOPLIST_KEY_NSScreenCaptureUsageDescription: Foldy captures your desktop only while rendering the fold effect. Frames stay on your Mac and are never saved.
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
     entitlements:
-      path: LidBend/LidBend.entitlements
-  LidBendTests:
+      path: Foldy/Foldy.entitlements
+  FoldyTests:
     type: bundle.unit-test
     platform: macOS
     sources:
-      - path: LidBendTests
+      - path: FoldyTests
     dependencies:
-      - target: LidBend
+      - target: Foldy
     settings:
       base:
-        PRODUCT_BUNDLE_IDENTIFIER: com.lidbend.tests
+        PRODUCT_BUNDLE_IDENTIFIER: com.foldy.tests
         GENERATE_INFOPLIST_FILE: YES
 schemes:
-  LidBend:
+  Foldy:
     build:
       targets:
-        LidBend: all
-        LidBendTests: [test]
+        Foldy: all
+        FoldyTests: [test]
     test:
       targets:
-        - LidBendTests
+        - FoldyTests

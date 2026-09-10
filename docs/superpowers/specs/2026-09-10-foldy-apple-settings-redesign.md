@@ -8,7 +8,7 @@ Turn the current menu-bar prototype into a cohesive Foldy-branded macOS app whos
 
 - The only product name is **Foldy**.
 - Rename the Xcode project, app target, test target, product, executable, bundle identifier, Swift app entry point, source folders, documentation, package names, and user-facing copy.
-- Remove obsolete LidBend-branded files rather than keeping compatibility aliases.
+- Remove obsolete Foldy-branded files rather than keeping compatibility aliases.
 - Remove the unused direct-payment and license scaffolding. Monetization is outside this release.
 - Keep the existing original fold icon, regenerated and catalogued under Foldy naming.
 
@@ -108,7 +108,7 @@ The old generated project and old-named product artifacts are removed from the r
 
 ## Acceptance criteria
 
-- The app and repository contain no current `LidBend` branding or executable artifacts.
+- The app and repository contain no current `Foldy` branding or executable artifacts.
 - Foldy displays a native Apple-style Settings window with General, Appearance, and About destinations.
 - Silk, Shade, Frost, Perspective, Variable Blur, Shadow, Follow Lid, and manual angle controls all work.
 - Preview and live overlay use the same settings.

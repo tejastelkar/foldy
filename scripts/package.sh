@@ -11,23 +11,23 @@ export DEVELOPER_DIR="$developer_dir"
 xcodegen generate
 if [[ "${SKIP_TESTS:-0}" != "1" ]]; then
   xcodebuild test \
-    -project LidBend.xcodeproj \
-    -scheme LidBend \
+    -project Foldy.xcodeproj \
+    -scheme Foldy \
     -destination 'platform=macOS' \
     -derivedDataPath "$build_root/TestData" \
     CODE_SIGNING_ALLOWED=NO
 fi
 
 xcodebuild build \
-  -project LidBend.xcodeproj \
-  -scheme LidBend \
+  -project Foldy.xcodeproj \
+  -scheme Foldy \
   -configuration Release \
   -destination 'platform=macOS' \
   -derivedDataPath "$build_root/DerivedData" \
   CODE_SIGNING_ALLOWED=NO
 
-app_source="$build_root/DerivedData/Build/Products/Release/LidBend.app"
-app_output="$build_root/LidBend.app"
+app_source="$build_root/DerivedData/Build/Products/Release/Foldy.app"
+app_output="$build_root/Foldy.app"
 /usr/bin/ditto "$app_source" "$app_output"
 
 if [[ -n "${CODE_SIGN_IDENTITY:-}" && -n "${DEVELOPMENT_TEAM:-}" ]]; then
@@ -37,10 +37,10 @@ else
   /usr/bin/codesign --force --deep --sign - "$app_output"
 fi
 
-dmg_output="$build_root/LidBend.dmg"
-zip_output="$build_root/LidBend.zip"
+dmg_output="$build_root/Foldy.dmg"
+zip_output="$build_root/Foldy.zip"
 /bin/rm -f "$dmg_output" "$zip_output"
-if ! /usr/bin/hdiutil create -ov -volname LidBend -srcfolder "$app_output" -format UDZO "$dmg_output"; then
+if ! /usr/bin/hdiutil create -ov -volname Foldy -srcfolder "$app_output" -format UDZO "$dmg_output"; then
   print "Disk image service unavailable; creating a ZIP instead."
   /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$app_output" "$zip_output"
 fi
