@@ -28,6 +28,7 @@ struct MenuBarContentView: View {
                 isOn: Binding(
                     get: { model.isEnabled },
                     set: {
+                        model.configure(startAngle: settings.startAngle)
                         settings.effectEnabled = $0
                         model.setEnabled($0)
                     }
@@ -99,6 +100,12 @@ struct MenuBarContentView: View {
         }
         .padding(16)
         .frame(width: 280)
+        .onAppear {
+            model.configure(startAngle: settings.startAngle)
+        }
+        .onChange(of: settings.startAngle) { _, newValue in
+            model.configure(startAngle: newValue)
+        }
     }
 
     private var compatibilityText: String {

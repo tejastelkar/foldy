@@ -11,6 +11,7 @@ final class AppModel: ObservableObject {
     private let sensor: LidAngleProviding
     private let overlay: OverlayCoordinating
     private var safety = EffectSafetyController()
+    private var startAngle = 110.0
     private var angleTask: Task<Void, Never>?
     private var staleTask: Task<Void, Never>?
 
@@ -33,8 +34,19 @@ final class AppModel: ObservableObject {
         }
     }
 
+    func configure(startAngle: Double) {
+        self.startAngle = min(max(startAngle, 75), 125)
+        guard !isEnabled else { return }
+        safety = EffectSafetyController(
+            mapper: FoldStateMapper(openAngle: self.startAngle, closedAngle: 12, hysteresis: 3)
+        )
+    }
+
     private func startEffect() async {
         errorMessage = nil
+        safety = EffectSafetyController(
+            mapper: FoldStateMapper(openAngle: startAngle, closedAngle: 12, hysteresis: 3)
+        )
         do {
             try sensor.start()
             let angles = sensor.angles

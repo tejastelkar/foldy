@@ -34,4 +34,11 @@ final class FoldStateMapperTests: XCTestCase {
         XCTAssertTrue(mapper.state(for: 112, previousVisible: true).isVisible)
         XCTAssertFalse(mapper.state(for: 114, previousVisible: true).isVisible)
     }
+
+    func testCustomStartAngleChangesVisibilityThreshold() {
+        let earlyMapper = FoldStateMapper(openAngle: 95, closedAngle: 12, hysteresis: 3)
+
+        XCTAssertFalse(earlyMapper.state(for: 100, previousVisible: false).isVisible)
+        XCTAssertTrue(earlyMapper.state(for: 90, previousVisible: false).isVisible)
+    }
 }

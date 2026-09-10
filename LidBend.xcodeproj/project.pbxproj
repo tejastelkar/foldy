@@ -34,10 +34,10 @@
 		91B3216010B4E58AF656D61E /* LidAngleProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3D8F4AD9F17819856B23C2 /* LidAngleProviding.swift */; };
 		AD5E423E9C1232F054EC8A1B /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDC414CC93C4B7C156B877B /* AppModel.swift */; };
 		B9D3DAAA6EDB274A7057CD0C /* OverlaySafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926ABF06F4EEFAA0BDC40278 /* OverlaySafetyTests.swift */; };
+		BA62CF92D13CBA317DADB616 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4900EC8EFA3CB09143E9726 /* AppDelegate.swift */; };
 		BDD34C94C72284F88B6F50AB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7A72D5E6F9D5E6F7475ACC80 /* OnboardingView.swift */; };
 		BFC0453CCD36A191EA1AE26A /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D92B4BE40AE72ACEE5A0A5 /* AppModelTests.swift */; };
 		C22DBD58C23055DF9B76D9C2 /* EntitlementStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1DEA5D81AB5A0B82F2684406 /* EntitlementStoreTests.swift */; };
-		D0A89242D0F4AFD3C2A02C22 /* FoldShaders.metal in Sources */ = {isa = PBXBuildFile; fileRef = 0A73FEEA6CB7C577623C8A68 /* FoldShaders.metal */; };
 		D8248595FF73D183F8D1AE1D /* HIDReportParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1713C5B07CF1B719639C11 /* HIDReportParserTests.swift */; };
 		E0EB6FDE8EAA882C4E89F4F5 /* LidBendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE687A5764EE8DE6A2A59A /* LidBendApp.swift */; };
 		E32FD9F526EA7CBE6EB902C5 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6C886156DEDEF0E76AA13456 /* AppSettings.swift */; };
@@ -56,7 +56,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A73FEEA6CB7C577623C8A68 /* FoldShaders.metal */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.metal; path = FoldShaders.metal; sourceTree = "<group>"; };
 		0BAC6FB06787C8B188A8983D /* ScreenCaptureServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureServicing.swift; sourceTree = "<group>"; };
 		0F5A5A68ED032D89FA8D90E1 /* OverlayCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayCoordinator.swift; sourceTree = "<group>"; };
 		19B3DA054B7C492547F3B5F6 /* FoldStateMapper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldStateMapper.swift; sourceTree = "<group>"; };
@@ -89,6 +88,7 @@
 		B17AD61BD90667333E461B98 /* AngleSmootherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleSmootherTests.swift; sourceTree = "<group>"; };
 		BD1C757D44D48D9CF7C5CBAF /* PreviewAngleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProvider.swift; sourceTree = "<group>"; };
 		BD25A7508B2912CAD75DD605 /* EntitlementStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntitlementStore.swift; sourceTree = "<group>"; };
+		C4900EC8EFA3CB09143E9726 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		D24A61BE7DF3D89B1C95EBE9 /* PreviewAngleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProviderTests.swift; sourceTree = "<group>"; };
 		D770743C0E206956A0ED97C1 /* HIDReportParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDReportParser.swift; sourceTree = "<group>"; };
 		E1AE688DE45FBC5713B61A5D /* PreviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewView.swift; sourceTree = "<group>"; };
@@ -110,6 +110,7 @@
 		306EAAD5B226B6AA45B05AA6 /* App */ = {
 			isa = PBXGroup;
 			children = (
+				C4900EC8EFA3CB09143E9726 /* AppDelegate.swift */,
 				6DDC414CC93C4B7C156B877B /* AppModel.swift */,
 				3BAE687A5764EE8DE6A2A59A /* LidBendApp.swift */,
 			);
@@ -194,7 +195,6 @@
 			children = (
 				19BA20971D644EAE7DF74E22 /* FoldRenderer.swift */,
 				A8D696FF7F68CF4E641BC2B1 /* FoldRenderParameters.swift */,
-				0A73FEEA6CB7C577623C8A68 /* FoldShaders.metal */,
 			);
 			path = Rendering;
 			sourceTree = "<group>";
@@ -356,6 +356,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9145D68B0659D4D73DE2F4AA /* AngleSmoother.swift in Sources */,
+				BA62CF92D13CBA317DADB616 /* AppDelegate.swift in Sources */,
 				AD5E423E9C1232F054EC8A1B /* AppModel.swift in Sources */,
 				E32FD9F526EA7CBE6EB902C5 /* AppSettings.swift in Sources */,
 				2BA8E34922FAED47E171889A /* DirectLicenseStore.swift in Sources */,
@@ -364,7 +365,6 @@
 				0E97E390315CBD647F632DA3 /* FoldMetalView.swift in Sources */,
 				374AA2148342A3E6F7EE8399 /* FoldRenderParameters.swift in Sources */,
 				5D53BA22FBC109AAE8F78A72 /* FoldRenderer.swift in Sources */,
-				D0A89242D0F4AFD3C2A02C22 /* FoldShaders.metal in Sources */,
 				186C9DFE5CB79919F2ABC6AC /* FoldState.swift in Sources */,
 				43C2D4976D2F0FDFD1FD9F96 /* FoldStateMapper.swift in Sources */,
 				566E9D2ED84972FFC3BD601D /* HIDAngleProvider.swift in Sources */,
