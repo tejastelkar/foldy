@@ -8,12 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		0114B487912DD01FBFDB7130 /* AngleSmootherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B17AD61BD90667333E461B98 /* AngleSmootherTests.swift */; };
+		0659CEFCD27823795E17AEF3 /* PreviewAngleProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D24A61BE7DF3D89B1C95EBE9 /* PreviewAngleProviderTests.swift */; };
+		088116245AA2A4C235A8E2D1 /* HIDReportParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D770743C0E206956A0ED97C1 /* HIDReportParser.swift */; };
 		186C9DFE5CB79919F2ABC6AC /* FoldState.swift in Sources */ = {isa = PBXBuildFile; fileRef = F7912EEB3BBC748359D80592 /* FoldState.swift */; };
 		43C2D4976D2F0FDFD1FD9F96 /* FoldStateMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B3DA054B7C492547F3B5F6 /* FoldStateMapper.swift */; };
+		566E9D2ED84972FFC3BD601D /* HIDAngleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5F12757B74571932B84BE0B8 /* HIDAngleProvider.swift */; };
+		59C1B807A14CEB10EA84A03E /* PreviewAngleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD1C757D44D48D9CF7C5CBAF /* PreviewAngleProvider.swift */; };
 		6AD4EBE199DAD6003E41F78E /* FoldStateMapperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7180A5703F912A0AEEAB6809 /* FoldStateMapperTests.swift */; };
 		9145D68B0659D4D73DE2F4AA /* AngleSmoother.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63F0B7D6C267A0CF4F6915B6 /* AngleSmoother.swift */; };
+		91B3216010B4E58AF656D61E /* LidAngleProviding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4E3D8F4AD9F17819856B23C2 /* LidAngleProviding.swift */; };
 		AD5E423E9C1232F054EC8A1B /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDC414CC93C4B7C156B877B /* AppModel.swift */; };
 		BFC0453CCD36A191EA1AE26A /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D92B4BE40AE72ACEE5A0A5 /* AppModelTests.swift */; };
+		D8248595FF73D183F8D1AE1D /* HIDReportParserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7E1713C5B07CF1B719639C11 /* HIDReportParserTests.swift */; };
 		E0EB6FDE8EAA882C4E89F4F5 /* LidBendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE687A5764EE8DE6A2A59A /* LidBendApp.swift */; };
 		E768E4788A80ECDAA03A9B62 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FE050F2C2F046401FD5EC /* MenuBarContentView.swift */; };
 		F2E422CEDF4A5FCB6746B3BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3F5B519690540F6289696C /* Assets.xcassets */; };
@@ -34,14 +40,20 @@
 		1AA75E0BC52881BAAEBC5E7C /* LidBendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LidBendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3BAE687A5764EE8DE6A2A59A /* LidBendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidBendApp.swift; sourceTree = "<group>"; };
 		3E9FE050F2C2F046401FD5EC /* MenuBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContentView.swift; sourceTree = "<group>"; };
+		4E3D8F4AD9F17819856B23C2 /* LidAngleProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidAngleProviding.swift; sourceTree = "<group>"; };
 		58D92B4BE40AE72ACEE5A0A5 /* AppModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelTests.swift; sourceTree = "<group>"; };
+		5F12757B74571932B84BE0B8 /* HIDAngleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDAngleProvider.swift; sourceTree = "<group>"; };
 		63F0B7D6C267A0CF4F6915B6 /* AngleSmoother.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleSmoother.swift; sourceTree = "<group>"; };
 		67F058785FE61D599B0C8C97 /* LidBend.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LidBend.entitlements; sourceTree = "<group>"; };
 		6DDC414CC93C4B7C156B877B /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		7180A5703F912A0AEEAB6809 /* FoldStateMapperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldStateMapperTests.swift; sourceTree = "<group>"; };
+		7E1713C5B07CF1B719639C11 /* HIDReportParserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDReportParserTests.swift; sourceTree = "<group>"; };
 		AB33FDA31E46E898E21258A5 /* LidBend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LidBend.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AE3F5B519690540F6289696C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		B17AD61BD90667333E461B98 /* AngleSmootherTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AngleSmootherTests.swift; sourceTree = "<group>"; };
+		BD1C757D44D48D9CF7C5CBAF /* PreviewAngleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProvider.swift; sourceTree = "<group>"; };
+		D24A61BE7DF3D89B1C95EBE9 /* PreviewAngleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProviderTests.swift; sourceTree = "<group>"; };
+		D770743C0E206956A0ED97C1 /* HIDReportParser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDReportParser.swift; sourceTree = "<group>"; };
 		F7912EEB3BBC748359D80592 /* FoldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldState.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +91,8 @@
 				B17AD61BD90667333E461B98 /* AngleSmootherTests.swift */,
 				58D92B4BE40AE72ACEE5A0A5 /* AppModelTests.swift */,
 				7180A5703F912A0AEEAB6809 /* FoldStateMapperTests.swift */,
+				7E1713C5B07CF1B719639C11 /* HIDReportParserTests.swift */,
+				D24A61BE7DF3D89B1C95EBE9 /* PreviewAngleProviderTests.swift */,
 			);
 			path = LidBendTests;
 			sourceTree = "<group>";
@@ -87,6 +101,10 @@
 			isa = PBXGroup;
 			children = (
 				63F0B7D6C267A0CF4F6915B6 /* AngleSmoother.swift */,
+				5F12757B74571932B84BE0B8 /* HIDAngleProvider.swift */,
+				D770743C0E206956A0ED97C1 /* HIDReportParser.swift */,
+				4E3D8F4AD9F17819856B23C2 /* LidAngleProviding.swift */,
+				BD1C757D44D48D9CF7C5CBAF /* PreviewAngleProvider.swift */,
 			);
 			path = Sensor;
 			sourceTree = "<group>";
@@ -224,6 +242,8 @@
 				0114B487912DD01FBFDB7130 /* AngleSmootherTests.swift in Sources */,
 				BFC0453CCD36A191EA1AE26A /* AppModelTests.swift in Sources */,
 				6AD4EBE199DAD6003E41F78E /* FoldStateMapperTests.swift in Sources */,
+				D8248595FF73D183F8D1AE1D /* HIDReportParserTests.swift in Sources */,
+				0659CEFCD27823795E17AEF3 /* PreviewAngleProviderTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -235,8 +255,12 @@
 				AD5E423E9C1232F054EC8A1B /* AppModel.swift in Sources */,
 				186C9DFE5CB79919F2ABC6AC /* FoldState.swift in Sources */,
 				43C2D4976D2F0FDFD1FD9F96 /* FoldStateMapper.swift in Sources */,
+				566E9D2ED84972FFC3BD601D /* HIDAngleProvider.swift in Sources */,
+				088116245AA2A4C235A8E2D1 /* HIDReportParser.swift in Sources */,
+				91B3216010B4E58AF656D61E /* LidAngleProviding.swift in Sources */,
 				E0EB6FDE8EAA882C4E89F4F5 /* LidBendApp.swift in Sources */,
 				E768E4788A80ECDAA03A9B62 /* MenuBarContentView.swift in Sources */,
+				59C1B807A14CEB10EA84A03E /* PreviewAngleProvider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
