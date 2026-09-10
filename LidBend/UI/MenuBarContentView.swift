@@ -3,7 +3,9 @@ import SwiftUI
 
 struct MenuBarContentView: View {
     @ObservedObject var model: AppModel
+    @ObservedObject var settings: AppSettings
     @Environment(\.openWindow) private var openWindow
+    @State private var launchAtLoginError: String?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -25,7 +27,10 @@ struct MenuBarContentView: View {
                 "Enable lid effect",
                 isOn: Binding(
                     get: { model.isEnabled },
-                    set: { model.setEnabled($0) }
+                    set: {
+                        settings.effectEnabled = $0
+                        model.setEnabled($0)
+                    }
                 )
             )
 
@@ -47,6 +52,41 @@ struct MenuBarContentView: View {
 
             Button("Preview effect…") {
                 openWindow(id: "preview")
+                NSApplication.shared.activate(ignoringOtherApps: true)
+            }
+
+            VStack(alignment: .leading, spacing: 4) {
+                HStack {
+                    Text("Start bending at")
+                    Spacer()
+                    Text("\(Int(settings.startAngle))°")
+                        .monospacedDigit()
+                        .foregroundStyle(.secondary)
+                }
+                Slider(value: $settings.startAngle, in: 75...125, step: 1)
+            }
+
+            Toggle("Launch at login", isOn: Binding(
+                get: { settings.launchAtLogin },
+                set: { enabled in
+                    do {
+                        try LaunchAtLoginService().setEnabled(enabled)
+                        settings.launchAtLogin = enabled
+                        launchAtLoginError = nil
+                    } catch {
+                        launchAtLoginError = error.localizedDescription
+                    }
+                }
+            ))
+
+            if let launchAtLoginError {
+                Text(launchAtLoginError)
+                    .font(.caption)
+                    .foregroundStyle(.red)
+            }
+
+            Button("Setup & privacy…") {
+                openWindow(id: "onboarding")
                 NSApplication.shared.activate(ignoringOtherApps: true)
             }
 
