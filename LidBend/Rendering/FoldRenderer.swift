@@ -1,5 +1,6 @@
 import Metal
 import MetalKit
+import CoreVideo
 
 final class FoldRenderer: NSObject, MTKViewDelegate {
     enum RendererError: Error {
@@ -11,6 +12,7 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
     private let commandQueue: MTLCommandQueue
     private let pipelineState: MTLRenderPipelineState
     private var texture: MTLTexture
+    private var textureCache: CVMetalTextureCache?
     private var parameters = FoldRenderParameters(state: .hidden, viewportSize: .zero)
 
     init(view: MTKView) throws {
@@ -37,6 +39,7 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
 
         self.commandQueue = commandQueue
         self.texture = Self.makeFallbackTexture(device: device)
+        CVMetalTextureCacheCreate(kCFAllocatorDefault, nil, device, nil, &textureCache)
         super.init()
     }
 
@@ -45,6 +48,29 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
     }
 
     func update(texture: MTLTexture) {
+        self.texture = texture
+    }
+
+    func update(pixelBuffer: CVPixelBuffer) {
+        guard let textureCache else { return }
+        let width = CVPixelBufferGetWidth(pixelBuffer)
+        let height = CVPixelBufferGetHeight(pixelBuffer)
+        var metalTexture: CVMetalTexture?
+        let status = CVMetalTextureCacheCreateTextureFromImage(
+            kCFAllocatorDefault,
+            textureCache,
+            pixelBuffer,
+            nil,
+            .bgra8Unorm,
+            width,
+            height,
+            0,
+            &metalTexture
+        )
+        guard status == kCVReturnSuccess,
+              let metalTexture,
+              let texture = CVMetalTextureGetTexture(metalTexture)
+        else { return }
         self.texture = texture
     }
 

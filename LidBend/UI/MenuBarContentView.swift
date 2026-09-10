@@ -29,6 +29,22 @@ struct MenuBarContentView: View {
                 )
             )
 
+            HStack {
+                Circle()
+                    .fill(model.isEnabled ? Color.green : Color.secondary)
+                    .frame(width: 7, height: 7)
+                Text(model.currentAngle.map { "Live angle: \(Int($0.rounded()))°" } ?? compatibilityText)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+            }
+
+            if let error = model.errorMessage {
+                Text(error)
+                    .font(.caption)
+                    .foregroundStyle(.red)
+                    .fixedSize(horizontal: false, vertical: true)
+            }
+
             Button("Preview effect…") {
                 openWindow(id: "preview")
                 NSApplication.shared.activate(ignoringOtherApps: true)
@@ -43,5 +59,16 @@ struct MenuBarContentView: View {
         }
         .padding(16)
         .frame(width: 280)
+    }
+
+    private var compatibilityText: String {
+        switch model.sensorAvailability {
+        case .unknown:
+            "Checking lid sensor…"
+        case .available:
+            "Lid sensor ready"
+        case .unavailable(let reason):
+            reason
+        }
     }
 }
