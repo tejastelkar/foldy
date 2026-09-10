@@ -108,7 +108,7 @@ final class AppModel: ObservableObject {
         currentAngle = angle
         let state = safety.ingest(angle: angle, at: Date.timeIntervalSinceReferenceDate)
         if wasVisible, !state.isVisible, playOpeningSound {
-            NSSound(named: "Pop")?.play()
+            FoldChime.play()
         }
         wasVisible = state.isVisible
         do {

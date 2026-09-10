@@ -1,68 +1,178 @@
 import AppKit
+import Combine
 import CoreGraphics
 import SwiftUI
 
 struct OnboardingView: View {
-    @ObservedObject var settings: AppSettings
-    @State private var page = 0
-    @State private var permissionGranted = CGPreflightScreenCaptureAccess()
+    private enum Page: Int, CaseIterable {
+        case welcome, hinge, permission, ready
 
-    var body: some View {
-        VStack(spacing: 22) {
-            Image(systemName: page == 0 ? "macbook" : page == 1 ? "rectangle.inset.filled.and.person.filled" : "sparkles")
-                .font(.system(size: 52, weight: .light))
-                .foregroundStyle(.tint)
-
-            Text(title)
-                .font(.largeTitle.bold())
-
-            Text(message)
-                .multilineTextAlignment(.center)
-                .foregroundStyle(.secondary)
-                .frame(maxWidth: 430)
-
-            if page == 1 {
-                Button(permissionGranted ? "Permission granted" : "Allow Screen Recording") {
-                    permissionGranted = CGRequestScreenCaptureAccess()
-                }
-                .buttonStyle(.borderedProminent)
-                .disabled(permissionGranted)
-
-                Button("Open Privacy Settings") {
-                    NSWorkspace.shared.open(URL(string: "x-apple.systempreferences:com.apple.preference.security?Privacy_ScreenCapture")!)
-                }
-                .buttonStyle(.link)
-            }
-
-            HStack {
-                if page > 0 {
-                    Button("Back") { page -= 1 }
-                }
-                Spacer()
-                Button(page == 2 ? "Done" : "Continue") {
-                    if page == 2 {
-                        settings.hasCompletedOnboarding = true
-                        NSApplication.shared.keyWindow?.close()
-                    } else {
-                        page += 1
-                    }
-                }
-                .buttonStyle(.borderedProminent)
+        var icon: String {
+            switch self {
+            case .welcome: "sparkles.rectangle.stack.fill"
+            case .hinge: "macbook"
+            case .permission: "hand.raised.fill"
+            case .ready: "checkmark.seal.fill"
             }
         }
-        .padding(36)
-        .frame(width: 540, height: 430)
+    }
+
+    @ObservedObject var settings: AppSettings
+    let sensorAvailability: SensorAvailability
+    let onComplete: () -> Void
+    let onOpenSettings: () -> Void
+
+    @State private var page = Page.welcome
+    @State private var permissionGranted = CGPreflightScreenCaptureAccess()
+    private let permissionTimer = Timer.publish(every: 1.2, on: .main, in: .common).autoconnect()
+
+    var body: some View {
+        ZStack {
+            FoldyTheme.duoGradient.opacity(0.13).ignoresSafeArea()
+            Circle()
+                .fill(FoldyTheme.cyan.opacity(0.16))
+                .frame(width: 300, height: 300)
+                .blur(radius: 70)
+                .offset(x: 230, y: -190)
+
+            VStack(spacing: 0) {
+                pageIndicator
+                Spacer(minLength: 20)
+                pageContent
+                    .id(page)
+                    .transition(.asymmetric(insertion: .move(edge: .trailing).combined(with: .opacity), removal: .opacity))
+                Spacer(minLength: 22)
+                controls
+            }
+            .padding(34)
+        }
+        .frame(width: 620, height: 520)
+        .tint(FoldyTheme.blue)
+        .onReceive(permissionTimer) { _ in
+            guard page == .permission else { return }
+            permissionGranted = CGPreflightScreenCaptureAccess()
+        }
+        .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didActivateApplicationNotification)) { _ in
+            permissionGranted = CGPreflightScreenCaptureAccess()
+        }
+    }
+
+    private var pageIndicator: some View {
+        HStack(spacing: 7) {
+            ForEach(Page.allCases, id: \.rawValue) { item in
+                Capsule()
+                    .fill(item.rawValue <= page.rawValue ? FoldyTheme.blue : Color.secondary.opacity(0.2))
+                    .frame(width: item == page ? 30 : 8, height: 7)
+                    .animation(.snappy(duration: 0.28), value: page)
+            }
+        }
+        .frame(maxWidth: .infinity)
+    }
+
+    @ViewBuilder
+    private var pageContent: some View {
+        VStack(spacing: 18) {
+            ZStack {
+                Circle().fill(.ultraThinMaterial).frame(width: 108, height: 108)
+                Circle().stroke(FoldyTheme.cyan.opacity(0.35), lineWidth: 1).frame(width: 108, height: 108)
+                Image(systemName: page.icon)
+                    .font(.system(size: 46, weight: .medium))
+                    .symbolRenderingMode(.palette)
+                    .foregroundStyle(.white, FoldyTheme.blue)
+            }
+            .shadow(color: FoldyTheme.blue.opacity(0.22), radius: 24, y: 12)
+
+            Text(title).font(.system(size: 30, weight: .bold, design: .rounded))
+            Text(message)
+                .font(.body)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+                .frame(maxWidth: 470)
+
+            if page == .hinge { hingeStatus }
+            if page == .permission { permissionControls }
+            if page == .ready {
+                Label("Silk, Shade, and the new Frost glass effect are ready.", systemImage: "wand.and.stars")
+                    .font(.callout.weight(.medium))
+                    .padding(.horizontal, 16).padding(.vertical, 10)
+                    .background(.ultraThinMaterial, in: Capsule())
+            }
+        }
+    }
+
+    private var hingeStatus: some View {
+        HStack(spacing: 9) {
+            Circle().fill(sensorAvailable ? FoldyTheme.mint : Color.orange).frame(width: 9, height: 9)
+            Text(sensorAvailable ? "Hinge sensor ready — no tilt test required" : sensorMessage)
+                .font(.callout.weight(.medium))
+        }
+        .padding(.horizontal, 16).padding(.vertical, 10)
+        .background(.ultraThinMaterial, in: Capsule())
+    }
+
+    private var permissionControls: some View {
+        VStack(spacing: 10) {
+            Label(permissionGranted ? "Screen access is ready" : "Screen access is not enabled yet",
+                  systemImage: permissionGranted ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                .foregroundStyle(permissionGranted ? FoldyTheme.mint : Color.orange)
+                .font(.callout.weight(.semibold))
+
+            HStack(spacing: 10) {
+                if !permissionGranted {
+                    Button("Request Access") { permissionGranted = CGRequestScreenCaptureAccess() }
+                        .buttonStyle(.borderedProminent)
+                }
+                Button("Open System Settings") { PrivacySettingsDestination.screenRecording.open() }
+                    .buttonStyle(.bordered)
+            }
+        }
+    }
+
+    private var controls: some View {
+        HStack {
+            Button("Back") { move(to: page.rawValue - 1) }
+                .opacity(page == .welcome ? 0 : 1)
+                .disabled(page == .welcome)
+            Spacer()
+            if page == .ready {
+                Button("Open Foldy Settings", action: onOpenSettings)
+                Button("Start Using Foldy", action: onComplete).buttonStyle(.borderedProminent)
+            } else {
+                Button("Continue") { move(to: page.rawValue + 1) }.buttonStyle(.borderedProminent)
+            }
+        }
+    }
+
+    private func move(to rawValue: Int) {
+        guard let next = Page(rawValue: rawValue) else { return }
+        withAnimation(.snappy(duration: 0.3)) { page = next }
+    }
+
+    private var sensorAvailable: Bool {
+        if case .available = sensorAvailability { return true }
+        return false
+    }
+
+    private var sensorMessage: String {
+        if case .unavailable(let reason) = sensorAvailability { return reason }
+        return "Checking your MacBook hinge sensor…"
     }
 
     private var title: String {
-        ["Your desktop, physically alive", "One private permission", "Ready to bend"][page]
+        switch page {
+        case .welcome: "Your desktop, in motion"
+        case .hinge: "Lower the lid naturally"
+        case .permission: "Private screen access"
+        case .ready: "Foldy is ready"
+        }
     }
 
     private var message: String {
-        [
-            "Foldy reads your MacBook hinge and makes the desktop tilt, blur, and settle as you lower the lid.",
-            "Screen Recording lets Foldy render the desktop into the fold effect. Frames stay in memory, are never saved, and never leave your Mac.",
-            "Turn on the effect from the menu bar. Use Preview whenever you want to test it without moving the lid."
-        ][page]
+        switch page {
+        case .welcome: "Foldy gives your desktop a smooth, spatial response as your MacBook display moves."
+        case .hinge: "There is nothing to calibrate. Foldy reads the built-in hinge sensor and follows it automatically when the effect is enabled."
+        case .permission: "macOS requires Screen & System Audio Recording access so Foldy can display your live desktop inside the animation. Frames remain in memory and are never saved or uploaded."
+        case .ready: "Choose a style, enable Foldy from the menu bar, and lower the display. Preview lets you test everything without moving the lid."
+        }
     }
 }

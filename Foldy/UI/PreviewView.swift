@@ -36,6 +36,12 @@ struct PreviewView: View {
         }
         .padding(24)
         .frame(minWidth: 688, minHeight: 500)
-        .background(Color(nsColor: .windowBackgroundColor))
+        .tint(FoldyTheme.blue)
+        .background {
+            ZStack {
+                Color(nsColor: .windowBackgroundColor)
+                FoldyTheme.duoGradient.opacity(0.07)
+            }
+        }
     }
 }

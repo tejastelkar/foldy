@@ -144,12 +144,12 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
     struct FoldRenderParameters {
         float progress;
         float perspective;
-        float crease;
         float blur;
         float dim;
         float aspectRatio;
         float shadow;
         float styleMode;
+        float frost;
     };
 
     vertex VertexOut foldVertex(uint vertexID [[vertex_id]]) {
@@ -194,27 +194,32 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
         float bend = sin(sourceUV.y * M_PI_F) * parameters.perspective * 0.035;
         sourceUV.x += (sourceUV.x - 0.5) * bend;
 
-        float blurStep = parameters.blur * 0.0028;
+        float frost = clamp(parameters.frost, 0.0, 1.0);
+        float blurStep = parameters.blur * mix(0.0028, 0.0068, frost) * (0.28 + p * 0.72);
+        float2 diagonal = float2(blurStep / max(parameters.aspectRatio, 1.0), blurStep);
         float4 color = float4(0.0);
-        color += screenTexture.sample(screenSampler, sourceUV + float2(0, -4 * blurStep)) * 0.05;
-        color += screenTexture.sample(screenSampler, sourceUV + float2(0, -3 * blurStep)) * 0.09;
+        color += screenTexture.sample(screenSampler, sourceUV) * 0.28;
+        color += screenTexture.sample(screenSampler, sourceUV + float2(0, -3 * blurStep)) * 0.10;
         color += screenTexture.sample(screenSampler, sourceUV + float2(0, -2 * blurStep)) * 0.12;
-        color += screenTexture.sample(screenSampler, sourceUV + float2(0, -1 * blurStep)) * 0.15;
-        color += screenTexture.sample(screenSampler, sourceUV) * 0.18;
-        color += screenTexture.sample(screenSampler, sourceUV + float2(0, 1 * blurStep)) * 0.15;
+        color += screenTexture.sample(screenSampler, sourceUV + float2(0, -blurStep)) * 0.14;
+        color += screenTexture.sample(screenSampler, sourceUV + float2(0, blurStep)) * 0.14;
         color += screenTexture.sample(screenSampler, sourceUV + float2(0, 2 * blurStep)) * 0.12;
-        color += screenTexture.sample(screenSampler, sourceUV + float2(0, 3 * blurStep)) * 0.09;
-        color += screenTexture.sample(screenSampler, sourceUV + float2(0, 4 * blurStep)) * 0.05;
-
-        float creaseDistance = abs(sourceUV.x - 0.5);
-        float creaseShadow = exp(-creaseDistance * 85.0) * parameters.crease * (0.18 + parameters.shadow * 0.34);
-        float creaseEdge = exp(-abs(creaseDistance - 0.018) * 120.0) * parameters.crease * 0.10;
-        color.rgb = color.rgb * (1.0 - creaseShadow) + creaseEdge;
+        color += screenTexture.sample(screenSampler, sourceUV + float2(0, 3 * blurStep)) * 0.10;
+        color += screenTexture.sample(screenSampler, sourceUV + diagonal * float2(-2, -2)) * (0.05 * frost);
+        color += screenTexture.sample(screenSampler, sourceUV + diagonal * float2(2, -2)) * (0.05 * frost);
+        color += screenTexture.sample(screenSampler, sourceUV + diagonal * float2(-2, 2)) * (0.05 * frost);
+        color += screenTexture.sample(screenSampler, sourceUV + diagonal * float2(2, 2)) * (0.05 * frost);
+        color.rgb /= 1.0 + 0.20 * frost;
 
         float horizonShade = p * (1.0 - sourceUV.y) * (0.08 + parameters.shadow * 0.24);
         color.rgb *= 1.0 - horizonShade;
-        if (parameters.styleMode > 1.5) {
-            color.rgb = mix(color.rgb, float3(0.72, 0.84, 1.0), p * 0.16);
+        if (frost > 0.5) {
+            float luminance = dot(color.rgb, float3(0.2126, 0.7152, 0.0722));
+            color.rgb = mix(color.rgb, float3(luminance), 0.24 + p * 0.18);
+            float glassStrength = (0.18 + parameters.blur * 0.20) * (0.30 + p * 0.70);
+            color.rgb = mix(color.rgb, float3(0.69, 0.85, 1.0), glassStrength);
+            float bloom = pow(1.0 - sourceUV.y, 2.0) * p * 0.12;
+            color.rgb += float3(0.30, 0.64, 1.0) * bloom;
         } else if (parameters.styleMode > 0.5) {
             color.rgb *= 1.0 - p * parameters.shadow * 0.13;
         }

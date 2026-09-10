@@ -1,4 +1,6 @@
 import AppKit
+import Combine
+import CoreGraphics
 import SwiftUI
 
 struct SettingsRootView: View {
@@ -19,6 +21,7 @@ struct SettingsRootView: View {
 
     @ObservedObject var model: AppModel
     @ObservedObject var settings: AppSettings
+    var showOnboarding: (() -> Void)?
     @State private var selection: Destination? = .appearance
 
     var body: some View {
@@ -36,13 +39,13 @@ struct SettingsRootView: View {
             .navigationSplitViewColumnWidth(min: 180, ideal: 190, max: 220)
         } detail: {
             switch selection ?? .appearance {
-            case .general: GeneralSettingsView(model: model, settings: settings)
+            case .general: GeneralSettingsView(model: model, settings: settings, showOnboarding: showOnboarding)
             case .appearance: AppearanceSettingsView(model: model, settings: settings)
             case .about: AboutSettingsView()
             }
         }
         .frame(minWidth: 820, minHeight: 610)
-        .tint(Color(nsColor: .controlAccentColor))
+        .tint(FoldyTheme.blue)
         .onAppear(perform: syncModel)
         .onChange(of: settings.appearance) { _, _ in syncModel() }
         .onChange(of: settings.clearAngle) { _, _ in syncModel() }
@@ -57,7 +60,9 @@ struct SettingsRootView: View {
 private struct GeneralSettingsView: View {
     @ObservedObject var model: AppModel
     @ObservedObject var settings: AppSettings
+    let showOnboarding: (() -> Void)?
     @State private var loginError: String?
+    @State private var hasScreenAccess = CGPreflightScreenCaptureAccess()
 
     var body: some View {
         Form {
@@ -84,9 +89,26 @@ private struct GeneralSettingsView: View {
             Section("Sound") {
                 Toggle("Play a sound when the desktop opens", isOn: $settings.playOpeningSound)
             }
+
+            Section("Setup & Privacy") {
+                LabeledContent("Screen access") {
+                    Label(hasScreenAccess ? "Ready" : "Needs access",
+                          systemImage: hasScreenAccess ? "checkmark.circle.fill" : "exclamationmark.circle.fill")
+                        .foregroundStyle(hasScreenAccess ? FoldyTheme.mint : Color.orange)
+                }
+                Button("Open Screen Recording Settings") {
+                    PrivacySettingsDestination.screenRecording.open()
+                }
+                if let showOnboarding {
+                    Button("Show Setup Guide", action: showOnboarding)
+                }
+            }
         }
         .formStyle(.grouped)
         .navigationTitle("General")
+        .onReceive(NSWorkspace.shared.notificationCenter.publisher(for: NSWorkspace.didActivateApplicationNotification)) { _ in
+            hasScreenAccess = CGPreflightScreenCaptureAccess()
+        }
     }
 
     private func updateLaunchAtLogin(_ enabled: Bool) {
@@ -120,7 +142,7 @@ private struct AppearanceSettingsView: View {
                 Label("Appearance", systemImage: "circle.lefthalf.filled")
                     .font(.title2.weight(.semibold))
                     .symbolRenderingMode(.palette)
-                    .foregroundStyle(.white, .blue)
+                    .foregroundStyle(.white, FoldyTheme.blue)
 
                 MacBookPreview(state: previewState, appearance: settings.appearance)
                     .frame(maxWidth: 520).frame(height: 260).frame(maxWidth: .infinity)
@@ -151,7 +173,11 @@ private struct AppearanceSettingsView: View {
                     AppearanceSlider(title: "Shadow", value: $settings.shadow)
                 }
                 .padding(16)
-                .background(.quaternary.opacity(0.35), in: RoundedRectangle(cornerRadius: 14, style: .continuous))
+                .background(.ultraThinMaterial, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+                .overlay {
+                    RoundedRectangle(cornerRadius: 16, style: .continuous)
+                        .stroke(FoldyTheme.cyan.opacity(0.16), lineWidth: 1)
+                }
 
                 HStack {
                     VStack(alignment: .leading, spacing: 3) {
@@ -217,12 +243,12 @@ private struct StyleCard: View {
                 .frame(height: 78)
                 .overlay {
                     RoundedRectangle(cornerRadius: 12, style: .continuous)
-                        .stroke(selected ? Color.accentColor : .white.opacity(0.1), lineWidth: selected ? 3 : 1)
+                        .stroke(selected ? FoldyTheme.blue : .white.opacity(0.1), lineWidth: selected ? 3 : 1)
                 }
 
                 HStack(spacing: 5) {
                     Text(style.displayName)
-                    if selected { Image(systemName: "checkmark.circle.fill").foregroundStyle(.tint) }
+                    if selected { Image(systemName: "checkmark.circle.fill").foregroundStyle(FoldyTheme.blue) }
                 }
                 .font(.callout.weight(.medium))
             }
@@ -237,9 +263,9 @@ private struct StyleCard: View {
 
     private var background: LinearGradient {
         switch style {
-        case .silk: LinearGradient(colors: [.blue.opacity(0.9), .purple.opacity(0.65)], startPoint: .topLeading, endPoint: .bottomTrailing)
+        case .silk: LinearGradient(colors: [FoldyTheme.blue, FoldyTheme.indigo], startPoint: .topLeading, endPoint: .bottomTrailing)
         case .shade: LinearGradient(colors: [.gray.opacity(0.9), .black], startPoint: .top, endPoint: .bottom)
-        case .frost: LinearGradient(colors: [.cyan.opacity(0.75), .blue.opacity(0.45), .white.opacity(0.8)], startPoint: .topLeading, endPoint: .bottomTrailing)
+        case .frost: LinearGradient(colors: [FoldyTheme.cyan.opacity(0.82), FoldyTheme.blue.opacity(0.55), .white.opacity(0.9)], startPoint: .topLeading, endPoint: .bottomTrailing)
         }
     }
 }

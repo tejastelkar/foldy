@@ -21,13 +21,11 @@ struct FoldStateMapper: Sendable {
 
         let rawProgress = (openAngle - angle) / (openAngle - closedAngle)
         let progress = CGFloat(min(max(rawProgress, 0), 1))
-        let crease = smoothstep(edge0: 0.15, edge1: 0.85, value: progress)
         let dim = 0.75 * smoothstep(edge0: 0.55, edge1: 1, value: progress)
 
         return FoldState(
             progress: progress,
             perspective: 0.08 * progress,
-            crease: crease,
             blurRadius: 12 * progress * progress,
             dimAmount: dim,
             isVisible: true
