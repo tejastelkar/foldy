@@ -19,16 +19,21 @@
 		34E6DCE6A32DD7F80B9B2496 /* HIDAngleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835B2EE7FC2C19E611321C78 /* HIDAngleProvider.swift */; };
 		370FEFA34E11D516A2DAB513 /* FoldyApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = F658E38A0D908856C6EEBCE3 /* FoldyApp.swift */; };
 		3A1C727405EF18EE6DB21595 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4028A97560D06411D88B9AC6 /* OnboardingView.swift */; };
+		3D1011D4B3F82D5972F7A6F8 /* OverlayPresentationGateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34B70A87CA394FB826748BCC /* OverlayPresentationGateTests.swift */; };
 		4E95D8EED3009C6C2196EBFC /* ScreenCaptureServicing.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20534E1CB98F9BC199879283 /* ScreenCaptureServicing.swift */; };
 		4EF0DCB40237E718BB0F729F /* AngleSmootherTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF976B5FCC3C8ADDEFF3675B /* AngleSmootherTests.swift */; };
 		4FD488972BCA23F9C6C83A2F /* FoldRenderParameters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26B69CAD94DCC4389D620F27 /* FoldRenderParameters.swift */; };
+		561C2F6B0D0F976FA08E4CAE /* CaptureStreamSessionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69D0D9E8445921AFA4E16C1F /* CaptureStreamSessionTests.swift */; };
 		62B244E816246BE14EE379FB /* OverlaySafetyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DAB6E7B8F0284E338991BE9 /* OverlaySafetyTests.swift */; };
 		6307F1EBFBF6B97047494BAB /* FoldMetalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C94D571F4D5A71B7B6981CEC /* FoldMetalView.swift */; };
 		655E704179EA112209CC4BCE /* HIDReportParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D144F6723AD52E285376A3C0 /* HIDReportParser.swift */; };
 		6BC9C4359C1AB7B3205367FB /* AngleSmoother.swift in Sources */ = {isa = PBXBuildFile; fileRef = E580DB786E32EE5DF185D2F2 /* AngleSmoother.swift */; };
 		6C3501D99DCF5AEFCC9A3C0A /* PreviewAngleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 409301E4A79963D640B1906D /* PreviewAngleProvider.swift */; };
 		709C7448878FE35FEA47FFBA /* FoldRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = F926B8AD5178B63E8929BB4F /* FoldRenderer.swift */; };
+		75FC67C8D4F8595535D61DF8 /* CaptureStreamSinkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B866646B32F37586204E659E /* CaptureStreamSinkTests.swift */; };
 		784079A0F5CADBFF8A5E9944 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 51067E37FEF517A972200B58 /* AppDelegate.swift */; };
+		7D1010C70DA0F834FDD81FBC /* AsyncStreamSink.swift in Sources */ = {isa = PBXBuildFile; fileRef = 74CAED73D9E149538D5A74EC /* AsyncStreamSink.swift */; };
+		84D1B01CD0A568DAF178D5D8 /* OverlayPresentationGate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87EB395F981D772A92583AB8 /* OverlayPresentationGate.swift */; };
 		8942EC25A22B624C77D3E0E6 /* LaunchAtLoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA873A69DDB292CA18664E87 /* LaunchAtLoginService.swift */; };
 		8B18E25A79E6ADBADED3D47C /* PreviewAngleProviderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE8C66C54462A652C3F6263C /* PreviewAngleProviderTests.swift */; };
 		AA81850196E064E623FF4AEB /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90C8A09803DCD986F5AA8E94 /* AppModelTests.swift */; };
@@ -60,6 +65,7 @@
 		17E53DC45B6F359CA40C7244 /* Foldy.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Foldy.entitlements; sourceTree = "<group>"; };
 		20534E1CB98F9BC199879283 /* ScreenCaptureServicing.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureServicing.swift; sourceTree = "<group>"; };
 		26B69CAD94DCC4389D620F27 /* FoldRenderParameters.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldRenderParameters.swift; sourceTree = "<group>"; };
+		34B70A87CA394FB826748BCC /* OverlayPresentationGateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayPresentationGateTests.swift; sourceTree = "<group>"; };
 		379B39D5A413A9EAC9121089 /* LidAngleProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidAngleProviding.swift; sourceTree = "<group>"; };
 		39BAC286E01EC4A266E9D70C /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
 		3BF9DE7AE40AD9E6BCEC9C4F /* MenuBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContentView.swift; sourceTree = "<group>"; };
@@ -67,7 +73,10 @@
 		409301E4A79963D640B1906D /* PreviewAngleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProvider.swift; sourceTree = "<group>"; };
 		51067E37FEF517A972200B58 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5E10B804B625EF35932BDDDF /* SettingsRootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsRootView.swift; sourceTree = "<group>"; };
+		69D0D9E8445921AFA4E16C1F /* CaptureStreamSessionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureStreamSessionTests.swift; sourceTree = "<group>"; };
+		74CAED73D9E149538D5A74EC /* AsyncStreamSink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AsyncStreamSink.swift; sourceTree = "<group>"; };
 		835B2EE7FC2C19E611321C78 /* HIDAngleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HIDAngleProvider.swift; sourceTree = "<group>"; };
+		87EB395F981D772A92583AB8 /* OverlayPresentationGate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayPresentationGate.swift; sourceTree = "<group>"; };
 		8AF25CBFAB9BE89B528B5B7E /* ScreenCaptureService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScreenCaptureService.swift; sourceTree = "<group>"; };
 		90C8A09803DCD986F5AA8E94 /* AppModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelTests.swift; sourceTree = "<group>"; };
 		91E57D098561316BCE1C9EAB /* FoldState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldState.swift; sourceTree = "<group>"; };
@@ -79,6 +88,7 @@
 		AAFE8E0A6C7C4A556030341B /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		AE8C66C54462A652C3F6263C /* PreviewAngleProviderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProviderTests.swift; sourceTree = "<group>"; };
 		AE97B0E1C88B25F73DE9BD17 /* FoldAppearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldAppearance.swift; sourceTree = "<group>"; };
+		B866646B32F37586204E659E /* CaptureStreamSinkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CaptureStreamSinkTests.swift; sourceTree = "<group>"; };
 		C3FDF4BF8D42AF96920FCA64 /* Foldy.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Foldy.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C94D571F4D5A71B7B6981CEC /* FoldMetalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoldMetalView.swift; sourceTree = "<group>"; };
 		D01492DF0BAA7A4504425723 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -97,6 +107,7 @@
 		0A8AFE175A001E05A78F9F6F /* Capture */ = {
 			isa = PBXGroup;
 			children = (
+				74CAED73D9E149538D5A74EC /* AsyncStreamSink.swift */,
 				8AF25CBFAB9BE89B528B5B7E /* ScreenCaptureService.swift */,
 				20534E1CB98F9BC199879283 /* ScreenCaptureServicing.swift */,
 			);
@@ -144,9 +155,12 @@
 				DF976B5FCC3C8ADDEFF3675B /* AngleSmootherTests.swift */,
 				90C8A09803DCD986F5AA8E94 /* AppModelTests.swift */,
 				D36CA41012B0C2A8F751C36F /* AppSettingsTests.swift */,
+				69D0D9E8445921AFA4E16C1F /* CaptureStreamSessionTests.swift */,
+				B866646B32F37586204E659E /* CaptureStreamSinkTests.swift */,
 				DEF75F1D01D43A652B3CD65E /* FoldRenderParametersTests.swift */,
 				0544CEDF1A5DB688236806FF /* FoldStateMapperTests.swift */,
 				9230AD9FF0ACFE21D28B91B0 /* HIDReportParserTests.swift */,
+				34B70A87CA394FB826748BCC /* OverlayPresentationGateTests.swift */,
 				0DAB6E7B8F0284E338991BE9 /* OverlaySafetyTests.swift */,
 				AE8C66C54462A652C3F6263C /* PreviewAngleProviderTests.swift */,
 			);
@@ -219,6 +233,7 @@
 				C94D571F4D5A71B7B6981CEC /* FoldMetalView.swift */,
 				A57B8330BAD179278E55F82A /* OverlayCoordinating.swift */,
 				9BA732E48E6D49B25C71CF5F /* OverlayCoordinator.swift */,
+				87EB395F981D772A92583AB8 /* OverlayPresentationGate.swift */,
 			);
 			path = Overlay;
 			sourceTree = "<group>";
@@ -337,6 +352,7 @@
 				784079A0F5CADBFF8A5E9944 /* AppDelegate.swift in Sources */,
 				0877038881864DD4D4501B83 /* AppModel.swift in Sources */,
 				295415AF8200D28280435182 /* AppSettings.swift in Sources */,
+				7D1010C70DA0F834FDD81FBC /* AsyncStreamSink.swift in Sources */,
 				FE642174E1046E3A0870B243 /* EffectSafetyController.swift in Sources */,
 				E49063491C99D8372B4439A1 /* FoldAppearance.swift in Sources */,
 				6307F1EBFBF6B97047494BAB /* FoldMetalView.swift in Sources */,
@@ -353,6 +369,7 @@
 				3A1C727405EF18EE6DB21595 /* OnboardingView.swift in Sources */,
 				AB12DA9ABDC56DFD26319985 /* OverlayCoordinating.swift in Sources */,
 				0A1CF4E1D6B50F5CF6FDFDF1 /* OverlayCoordinator.swift in Sources */,
+				84D1B01CD0A568DAF178D5D8 /* OverlayPresentationGate.swift in Sources */,
 				6C3501D99DCF5AEFCC9A3C0A /* PreviewAngleProvider.swift in Sources */,
 				F96F57347F90B84751615832 /* PreviewView.swift in Sources */,
 				E93587C0DDF38EF02B976F73 /* ScreenCaptureService.swift in Sources */,
@@ -368,9 +385,12 @@
 				4EF0DCB40237E718BB0F729F /* AngleSmootherTests.swift in Sources */,
 				AA81850196E064E623FF4AEB /* AppModelTests.swift in Sources */,
 				262CA8B27F818BAEE8951DDD /* AppSettingsTests.swift in Sources */,
+				561C2F6B0D0F976FA08E4CAE /* CaptureStreamSessionTests.swift in Sources */,
+				75FC67C8D4F8595535D61DF8 /* CaptureStreamSinkTests.swift in Sources */,
 				216FFEA5A30860997FF87D66 /* FoldRenderParametersTests.swift in Sources */,
 				04129D2637CE8D016B3E658E /* FoldStateMapperTests.swift in Sources */,
 				D7E962CBA1C69DD02D97A4B0 /* HIDReportParserTests.swift in Sources */,
+				3D1011D4B3F82D5972F7A6F8 /* OverlayPresentationGateTests.swift in Sources */,
 				62B244E816246BE14EE379FB /* OverlaySafetyTests.swift in Sources */,
 				8B18E25A79E6ADBADED3D47C /* PreviewAngleProviderTests.swift in Sources */,
 			);

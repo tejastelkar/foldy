@@ -9,6 +9,8 @@ final class OverlayCoordinator: OverlayCoordinating {
     private var renderer: FoldRenderer?
     private var frameTask: Task<Void, Never>?
     private var appearance: FoldAppearance = .silk
+    private let presentationGate = OverlayPresentationGate()
+    private var pendingState: FoldState?
 
     var isVisible: Bool { panel?.isVisible == true }
 
@@ -21,18 +23,30 @@ final class OverlayCoordinator: OverlayCoordinating {
     }
 
     func apply(_ state: FoldState) async throws {
+        pendingState = state
         guard state.isVisible else {
             await dismissAll()
             return
         }
 
         if panel == nil {
-            try await presentOverlay()
+            guard let token = presentationGate.begin() else { return }
+            defer {
+                let committed = presentationGate.finish(token)
+                if !committed {
+                    schedulePendingPresentationIfNeeded()
+                }
+            }
+            try await presentOverlay(token: token)
+            guard presentationGate.isCurrent(token) else { return }
         }
-        renderer?.update(state: state, appearance: appearance, viewportSize: panel?.contentView?.bounds.size ?? .zero)
+        guard let latestState = pendingState, latestState.isVisible else { return }
+        updateRenderer(with: latestState)
     }
 
     func dismissAll() async {
+        pendingState = nil
+        presentationGate.invalidate()
         frameTask?.cancel()
         frameTask = nil
         await captureService.stop()
@@ -41,7 +55,7 @@ final class OverlayCoordinator: OverlayCoordinating {
         renderer = nil
     }
 
-    private func presentOverlay() async throws {
+    private func presentOverlay(token: UUID) async throws {
         guard let screen = NSScreen.main,
               let number = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber
         else { throw ScreenCaptureError.displayUnavailable }
@@ -57,6 +71,11 @@ final class OverlayCoordinator: OverlayCoordinating {
         metalView.delegate = renderer
 
         try await captureService.start(displayID: CGDirectDisplayID(number.uint32Value))
+
+        guard presentationGate.isCurrent(token), pendingState?.isVisible == true else {
+            await captureService.stop()
+            return
+        }
 
         let panel = NSPanel(
             contentRect: screen.frame,
@@ -83,6 +102,30 @@ final class OverlayCoordinator: OverlayCoordinating {
                 guard !Task.isCancelled else { break }
                 self?.renderer?.update(pixelBuffer: frame.pixelBuffer)
             }
+            guard !Task.isCancelled else { return }
+            await self?.dismissAll()
+        }
+    }
+
+    private func updateRenderer(with state: FoldState) {
+        renderer?.update(
+            state: state,
+            appearance: appearance,
+            viewportSize: panel?.contentView?.bounds.size ?? .zero
+        )
+    }
+
+    private func schedulePendingPresentationIfNeeded() {
+        guard panel == nil, pendingState?.isVisible == true else { return }
+
+        Task { @MainActor [weak self] in
+            guard let self,
+                  !self.presentationGate.isPresenting,
+                  let state = self.pendingState,
+                  state.isVisible
+            else { return }
+
+            try? await self.apply(state)
         }
     }
 }

@@ -17,6 +17,8 @@ final class AppModel: ObservableObject {
     private var wasVisible = false
     private var angleTask: Task<Void, Never>?
     private var staleTask: Task<Void, Never>?
+    private var lifecycleTask: Task<Void, Never>?
+    private var lifecycleID = UUID()
 
     init(
         sensor: LidAngleProviding? = nil,
@@ -29,11 +31,23 @@ final class AppModel: ObservableObject {
     }
 
     func setEnabled(_ enabled: Bool) {
+        guard enabled != isEnabled || lifecycleTask != nil else { return }
+
+        lifecycleTask?.cancel()
+        let requestID = UUID()
+        lifecycleID = requestID
         isEnabled = enabled
+
         if enabled {
-            Task { await startEffect() }
+            lifecycleTask = Task { [weak self] in
+                await self?.startEffect(requestID: requestID)
+                self?.finishLifecycle(requestID: requestID)
+            }
         } else {
-            Task { await stopEffect() }
+            lifecycleTask = Task { [weak self] in
+                await self?.stopEffect(requestID: requestID)
+                self?.finishLifecycle(requestID: requestID)
+            }
         }
     }
 
@@ -51,19 +65,28 @@ final class AppModel: ObservableObject {
         overlay.update(appearance: appearance)
     }
 
-    private func startEffect() async {
+    private func startEffect(requestID: UUID) async {
+        guard requestID == lifecycleID, isEnabled, !Task.isCancelled else { return }
+
         errorMessage = nil
         safety = EffectSafetyController(
             mapper: FoldStateMapper(openAngle: clearAngle, closedAngle: 12, hysteresis: 3)
         )
         do {
             try sensor.start()
+            guard requestID == lifecycleID, isEnabled, !Task.isCancelled else {
+                sensor.stop()
+                return
+            }
+
             let angles = sensor.angles
             angleTask = Task { [weak self] in
                 for await angle in angles {
                     guard let self, !Task.isCancelled else { break }
                     await self.consume(angle: angle)
                 }
+                guard let self, !Task.isCancelled else { return }
+                await self.stopEffect(requestID: requestID)
             }
             staleTask = Task { [weak self] in
                 while !Task.isCancelled {
@@ -73,12 +96,15 @@ final class AppModel: ObservableObject {
                 }
             }
         } catch {
+            guard requestID == lifecycleID else { return }
             isEnabled = false
             errorMessage = error.localizedDescription
         }
     }
 
     private func consume(angle: Double) async {
+        guard isEnabled else { return }
+
         currentAngle = angle
         let state = safety.ingest(angle: angle, at: Date.timeIntervalSinceReferenceDate)
         if wasVisible, !state.isVisible, playOpeningSound {
@@ -88,18 +114,23 @@ final class AppModel: ObservableObject {
         do {
             try await overlay.apply(state)
         } catch {
+            guard isEnabled else { return }
             errorMessage = error.localizedDescription
-            await stopEffect()
+            await stopEffect(requestID: lifecycleID)
         }
     }
 
     private func checkForStaleSensor() async {
+        guard isEnabled else { return }
+
         if let state = safety.tick(at: Date.timeIntervalSinceReferenceDate) {
             try? await overlay.apply(state)
         }
     }
 
-    private func stopEffect() async {
+    private func stopEffect(requestID: UUID) async {
+        guard requestID == lifecycleID else { return }
+
         isEnabled = false
         angleTask?.cancel()
         staleTask?.cancel()
@@ -110,5 +141,10 @@ final class AppModel: ObservableObject {
         currentAngle = nil
         wasVisible = false
         await overlay.dismissAll()
+    }
+
+    private func finishLifecycle(requestID: UUID) {
+        guard requestID == lifecycleID else { return }
+        lifecycleTask = nil
     }
 }

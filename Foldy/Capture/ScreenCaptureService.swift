@@ -10,7 +10,7 @@ final class ScreenCaptureService: NSObject, ScreenCaptureServicing {
     var hasPermission: Bool { CGPreflightScreenCaptureAccess() }
 
     private var stream: SCStream?
-    nonisolated(unsafe) private var continuation: AsyncStream<CapturedFrame>.Continuation?
+    private var session: CaptureStreamSession?
     private let outputQueue = DispatchQueue(label: "com.foldy.capture", qos: .userInteractive)
 
     func start(displayID: CGDirectDisplayID) async throws {
@@ -41,27 +41,54 @@ final class ScreenCaptureService: NSObject, ScreenCaptureServicing {
         configuration.showsCursor = true
         configuration.capturesAudio = false
 
-        let pair = AsyncStream.makeStream(of: CapturedFrame.self)
-        frames = pair.stream
-        continuation = pair.continuation
+        let session = CaptureStreamSession()
+        frames = session.frames
 
-        let stream = SCStream(filter: filter, configuration: configuration, delegate: self)
-        try stream.addStreamOutput(self, type: .screen, sampleHandlerQueue: outputQueue)
+        let stream = SCStream(filter: filter, configuration: configuration, delegate: session)
+        try stream.addStreamOutput(session, type: .screen, sampleHandlerQueue: outputQueue)
+        self.session = session
         self.stream = stream
-        try await stream.startCapture()
+        do {
+            try await stream.startCapture()
+        } catch {
+            session.finish()
+            self.session = nil
+            self.stream = nil
+            throw error
+        }
     }
 
     func stop() async {
+        session?.finish()
         if let stream {
             try? await stream.stopCapture()
         }
+        session = nil
         stream = nil
-        continuation?.finish()
-        continuation = nil
     }
 }
 
-extension ScreenCaptureService: SCStreamOutput, SCStreamDelegate {
+final class CaptureStreamSession: NSObject, @unchecked Sendable {
+    let frames: AsyncStream<CapturedFrame>
+    private let sink: AsyncStreamSink<CapturedFrame>
+
+    override init() {
+        let sink = AsyncStreamSink<CapturedFrame>()
+        self.sink = sink
+        frames = sink.stream
+        super.init()
+    }
+
+    func yield(_ frame: CapturedFrame) {
+        sink.yield(frame)
+    }
+
+    func finish() {
+        sink.finish()
+    }
+}
+
+extension CaptureStreamSession: SCStreamOutput, SCStreamDelegate {
     nonisolated func stream(
         _ stream: SCStream,
         didOutputSampleBuffer sampleBuffer: CMSampleBuffer,
@@ -72,10 +99,10 @@ extension ScreenCaptureService: SCStreamOutput, SCStreamDelegate {
               let imageBuffer = sampleBuffer.imageBuffer
         else { return }
 
-        continuation?.yield(CapturedFrame(pixelBuffer: imageBuffer))
+        yield(CapturedFrame(pixelBuffer: imageBuffer))
     }
 
     nonisolated func stream(_ stream: SCStream, didStopWithError error: any Error) {
-        continuation?.finish()
+        finish()
     }
 }
