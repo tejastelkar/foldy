@@ -1,13 +1,14 @@
 import SwiftUI
 
 enum FoldyTheme {
-    static let blue = Color(red: 0.04, green: 0.52, blue: 1.0)
-    static let cyan = Color(red: 0.39, green: 0.82, blue: 1.0)
-    static let indigo = Color(red: 0.37, green: 0.36, blue: 0.90)
-    static let mint = Color(red: 0.38, green: 0.92, blue: 0.80)
+    static let blue = Color.accentColor
+    static let cyan = Color.cyan
+    static let indigo = Color.indigo
+    static let mint = Color(red: 0.18, green: 0.82, blue: 0.55)
 
+    // Refined subtle glass sheen replacing generic neon gradient
     static let duoGradient = LinearGradient(
-        colors: [blue, cyan, indigo],
+        colors: [Color.white.opacity(0.14), Color.white.opacity(0.04)],
         startPoint: .topLeading,
         endPoint: .bottomTrailing
     )

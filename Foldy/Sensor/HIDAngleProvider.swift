@@ -11,7 +11,7 @@ final class HIDAngleProvider: LidAngleProviding {
     nonisolated(unsafe) private let device: IOHIDDevice?
     private var continuation: AsyncStream<Double>.Continuation?
     nonisolated(unsafe) private var timer: Timer?
-    private var smoother = AngleSmoother()
+    private var smoother = AngleSmoother(adaptive: true)
 
     init() {
         if let device = Self.findDevice() {
@@ -33,7 +33,7 @@ final class HIDAngleProvider: LidAngleProviding {
         let pair = AsyncStream.makeStream(of: Double.self)
         angles = pair.stream
         continuation = pair.continuation
-        smoother = AngleSmoother()
+        smoother = AngleSmoother(adaptive: true)
         timer = Timer.scheduledTimer(withTimeInterval: 1.0 / 60.0, repeats: true) { [weak self] _ in
             Task { @MainActor in
                 self?.poll()

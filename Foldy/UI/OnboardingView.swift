@@ -28,12 +28,7 @@ struct OnboardingView: View {
 
     var body: some View {
         ZStack {
-            FoldyTheme.duoGradient.opacity(0.13).ignoresSafeArea()
-            Circle()
-                .fill(FoldyTheme.cyan.opacity(0.16))
-                .frame(width: 300, height: 300)
-                .blur(radius: 70)
-                .offset(x: 230, y: -190)
+            Color(nsColor: .windowBackgroundColor).ignoresSafeArea()
 
             VStack(spacing: 0) {
                 pageIndicator
@@ -61,8 +56,8 @@ struct OnboardingView: View {
         HStack(spacing: 7) {
             ForEach(Page.allCases, id: \.rawValue) { item in
                 Capsule()
-                    .fill(item.rawValue <= page.rawValue ? FoldyTheme.blue : Color.secondary.opacity(0.2))
-                    .frame(width: item == page ? 30 : 8, height: 7)
+                    .fill(item.rawValue <= page.rawValue ? Color.accentColor : Color.secondary.opacity(0.2))
+                    .frame(width: item == page ? 28 : 8, height: 6)
                     .animation(.snappy(duration: 0.28), value: page)
             }
         }
@@ -73,14 +68,12 @@ struct OnboardingView: View {
     private var pageContent: some View {
         VStack(spacing: 18) {
             ZStack {
-                Circle().fill(.ultraThinMaterial).frame(width: 108, height: 108)
-                Circle().stroke(FoldyTheme.cyan.opacity(0.35), lineWidth: 1).frame(width: 108, height: 108)
+                Circle().fill(.quaternary).frame(width: 96, height: 96)
+                Circle().stroke(Color.white.opacity(0.12), lineWidth: 1).frame(width: 96, height: 96)
                 Image(systemName: page.icon)
-                    .font(.system(size: 46, weight: .medium))
-                    .symbolRenderingMode(.palette)
-                    .foregroundStyle(.white, FoldyTheme.blue)
+                    .font(.system(size: 42, weight: .regular))
+                    .foregroundStyle(Color.accentColor)
             }
-            .shadow(color: FoldyTheme.blue.opacity(0.22), radius: 24, y: 12)
 
             Text(title).font(.system(size: 30, weight: .bold, design: .rounded))
             Text(message)

@@ -3,3 +3,4 @@ build/
 Config/Secrets.xcconfig
 *.xcuserstate
 xcuserdata/
+*.dmg

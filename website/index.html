@@ -1,0 +1,441 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Foldy — iPhone Duo Fold for Your MacBook</title>
+  <meta name="description" content="Your desktop bends as you close the lid. The fluid fold from iPhone Duo, engineered with Metal 3 for the MacBook you already have.">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Foldy">
+  <meta property="og:title" content="Foldy — iPhone Duo Fold for Your MacBook">
+  <meta property="og:description" content="Your desktop bends as you close the lid. The fluid fold from iPhone Duo, engineered with Metal 3 for macOS.">
+  <meta property="og:image" content="/assets/icon.png">
+  <link rel="icon" href="/assets/icon.png" type="image/png">
+  <link rel="preconnect" href="https://rsms.me/">
+  <link rel="stylesheet" href="https://rsms.me/inter/inter.css">
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.3.26/dist/lenis.min.js"></script>
+</head>
+<body>
+  <!-- Live Bend Counter Pill -->
+  <aside class="bend-counter" id="bendCounter" title="Bends made by visitors. Scroll or drag the hinge slider!">
+    <span class="counter-content counter-total">
+      <span class="live-dot"></span>
+      <strong id="bendTotal">1,420</strong>
+      <span>bends and counting</span>
+    </span>
+    <span class="counter-content counter-purchase" id="downloadHint">
+      Free & Open Source · Download Universal macOS DMG
+    </span>
+  </aside>
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <div class="brand">
+      <a class="wordmark" href="/">
+        <img src="/assets/icon.png" alt="Foldy App Icon" class="app-logo" width="26" height="26">
+        <span class="brand-name">Foldy</span>
+      </a>
+      <span class="badge os">macOS 14+</span>
+      <a class="pill" href="https://github.com/tejastelkar/foldy" target="_blank" rel="noopener">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span>Open Source</span>
+        <svg width="10" height="10" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M2.5 6h7M6.5 3 9.5 6l-3 3"/></svg>
+      </a>
+    </div>
+  </header>
+
+  <main class="stage">
+    <!-- Intro Section -->
+    <section class="intro">
+      <div class="pill-kicker">
+        <span class="kicker-dot"></span> Metal 3 GPU Acceleration · Native Lid Sensor
+      </div>
+      <h1>Your desktop bends as you close the lid.</h1>
+      <p class="lede">The fluid fold from iPhone Duo, engineered for the MacBook you already have. Your desktop tilts down, blurs and settles as the lid closes.</p>
+    </section>
+
+    <!-- CTAs -->
+    <div class="actions">
+      <div class="purchase-row">
+        <a class="button primary" id="downloadBtn" href="/assets/Foldy.dmg" download="Foldy.dmg">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.81-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M15.97 6.37c.62-.75 1.04-1.8 0.92-2.85-.9.04-2 .6-2.65 1.35-.58.66-1.08 1.73-.95 2.76 1.01.08 2.05-.51 2.68-1.26z"/></svg>
+          <span>Download Foldy</span>
+          <span class="amount">v1.0 · Free</span>
+        </a>
+        <span class="purchase-plus" aria-hidden="true">+</span>
+        <a class="kofi-bonus" href="https://ko-fi.com/tejastelkar" target="_blank" rel="noopener">
+          <div class="kofi-icon-box">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 8h1a4 4 0 0 1 0 8h-1"></path><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"></path><line x1="6" y1="1" x2="6" y2="4"></line><line x1="10" y1="1" x2="10" y2="4"></line><line x1="14" y1="1" x2="14" y2="4"></line></svg>
+          </div>
+          <div class="kofi-copy">
+            <p class="note"><strong>Buy Me a Coffee on Ko-fi</strong></p>
+            <p class="subnote">Support continuous updates & Mac craftsmanship</p>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <!-- Interactive 3D MacBook Experience -->
+    <figure class="figure">
+      <!-- Interactive Screen Controls Bar -->
+      <div class="simulator-bar">
+        <div class="sim-group angle-scrubber-group">
+          <label for="hingeAngleSlider">
+            <span class="sim-icon">💻</span>
+            <span class="sim-label">Lid Angle:</span>
+            <strong id="angleReadout">110°</strong>
+          </label>
+          <input type="range" id="hingeAngleSlider" min="15" max="135" value="110" step="1">
+          <div class="preset-buttons">
+            <button class="preset-btn active" data-angle="110">Open</button>
+            <button class="preset-btn" data-angle="75">Half</button>
+            <button class="preset-btn" data-angle="25">Deep Fold</button>
+          </div>
+        </div>
+
+        <div class="sim-divider"></div>
+
+        <div class="sim-group style-switcher-group">
+          <span class="sim-label">Material:</span>
+          <div class="segmented-control" id="styleSegmented">
+            <button class="segment active" data-style="silk" title="Silk: Soft liquid highlights and natural motion">✨ Silk</button>
+            <button class="segment" data-style="shade" title="Shade: Dramatic cinematic horizon shadows">🌑 Shade</button>
+            <button class="segment" data-style="frost" title="Frost: Frosted glass prism and liquid sheen">❄️ Frost</button>
+          </div>
+        </div>
+
+        <div class="sim-divider"></div>
+
+        <div class="sim-group wallpaper-group">
+          <span class="sim-label">Theme:</span>
+          <div class="wallpaper-dots" id="wallpaperDots">
+            <button class="wp-dot active" data-wp="sequoia" title="Sequoia Twilight" style="background: linear-gradient(135deg, #32435e, #c0cddc);"></button>
+            <button class="wp-dot" data-wp="sonoma" title="Sonoma Horizon" style="background: linear-gradient(135deg, #1b384f, #f79d65);"></button>
+            <button class="wp-dot" data-wp="aurora" title="Midnight Aurora" style="background: linear-gradient(135deg, #09203f, #537895);"></button>
+            <button class="wp-dot" data-wp="dark" title="Dark Graphite" style="background: linear-gradient(135deg, #191c24, #343a40);"></button>
+          </div>
+        </div>
+
+        <div class="sim-divider"></div>
+
+        <div class="sim-group sound-group">
+          <button class="sound-toggle-btn" id="soundToggle" title="Toggle fold sound effect">
+            <svg id="soundIconOn" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+            <svg id="soundIconOff" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display:none;"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><line x1="23" y1="9" x2="17" y2="15"></line><line x1="17" y1="9" x2="23" y2="15"></line></svg>
+            <span>Sound</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 3D MacBook Body -->
+      <div class="mac" id="mac">
+        <!-- Display Lid (Bezel + Notch + Folding Screen) -->
+        <div class="lid" id="lid">
+          <div class="screen-wrapper" id="screenWrapper">
+            <!-- Screen anchored at 50% 100% (the bottom hinge!) -->
+            <div class="screen" id="screen">
+              <!-- Sharp base artwork -->
+              <div class="art sharp" id="wallpaperBase">
+                <!-- SVG Canvas Art will be dynamically rendered -->
+              </div>
+              <!-- Progressive Blur Layers -->
+              <div class="art blurred b1" id="wallpaperBlur1"></div>
+              <div class="art blurred b2" id="wallpaperBlur2"></div>
+              <div class="art blurred b3" id="wallpaperBlur3"></div>
+
+              <!-- Frost Liquid Glass Layer -->
+              <div class="frost-glass-overlay" id="frostOverlay"></div>
+
+              <!-- Cinematic Horizon Shade Layer -->
+              <div class="shade" id="shade"></div>
+
+              <!-- Glint Bevel Layer -->
+              <div class="glint-layer" id="glintLayer"></div>
+
+              <!-- macOS Desktop UI: Menu Bar, Clock & Dock -->
+              <div class="macos-desktop-overlay">
+                <div class="macos-menubar">
+                  <div class="menubar-left">
+                    <span class="apple-logo"></span>
+                    <span class="active-app">Foldy</span>
+                    <span class="menu-item">File</span>
+                    <span class="menu-item">Edit</span>
+                    <span class="menu-item">View</span>
+                    <span class="menu-item">Window</span>
+                    <span class="menu-item">Help</span>
+                  </div>
+                  <div class="menubar-right">
+                    <span class="menu-icon foldy-status-icon" title="Foldy Active">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+                    </span>
+                    <span class="menu-icon">
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3a9 9 0 0 0-9 9 9 9 0 0 0 9 9 9 9 0 0 0 9-9 9 9 0 0 0-9-9zm0 16a7 7 0 1 1 7-7 7 7 0 0 1-7 7z"/></svg>
+                    </span>
+                    <span class="menubar-time" id="menubarTime">9:41 AM</span>
+                  </div>
+                </div>
+
+                <div class="clock" id="desktopClock">
+                  <small id="clockDate">Wednesday, September 9</small>
+                  <b id="clockTime">9:41</b>
+                </div>
+
+                <div class="home-indicator"></div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Apple Display Notch -->
+          <div class="notch">
+            <svg viewBox="0 0 64 9" preserveAspectRatio="none"><path d="M0 0Q2 0 2 2V5Q2 9 6 9H58Q62 9 62 5V2Q62 0 64 0Z" fill="#121212"/></svg>
+            <div class="camera-lens"></div>
+          </div>
+        </div>
+
+        <!-- Aluminum Hinge and Deck -->
+        <div class="deck">
+          <div class="lip"></div>
+        </div>
+      </div>
+      <figcaption class="caption">
+        <strong>Scroll or drag the slider.</strong> The screen tilts down, blurs and settles as it folds toward the keyboard deck.
+      </figcaption>
+    </figure>
+
+    <!-- Interactive Apple-Style Settings Studio -->
+    <section class="settings-studio-section">
+      <div class="section-badge">Mac-Native Design</div>
+      <h2>Engineered to feel like macOS System Settings</h2>
+      <p class="section-lede">Configurable appearance profiles, angle thresholds, and live preview right inside the menu bar.</p>
+
+      <div class="settings-window-mockup">
+        <div class="window-titlebar">
+          <div class="window-traffic-lights">
+            <span class="light close"></span>
+            <span class="light minimize"></span>
+            <span class="light maximize"></span>
+          </div>
+          <div class="window-title">Settings — Foldy</div>
+          <div class="window-spacer"></div>
+        </div>
+
+        <div class="window-body">
+          <!-- Sidebar -->
+          <div class="window-sidebar">
+            <div class="sidebar-section">
+              <span class="sidebar-section-title">CONFIGURATION</span>
+              <button class="sidebar-item active" data-tab="appearance">
+                <span class="sidebar-icon purple">🌓</span>
+                <span>Appearance</span>
+              </button>
+              <button class="sidebar-item" data-tab="general">
+                <span class="sidebar-icon blue">⚙️</span>
+                <span>General</span>
+              </button>
+            </div>
+            <div class="sidebar-section">
+              <span class="sidebar-section-title">FOLDY</span>
+              <button class="sidebar-item" data-tab="support">
+                <span class="sidebar-icon orange">☕️</span>
+                <span>Buy Me a Coffee</span>
+              </button>
+              <button class="sidebar-item" data-tab="about">
+                <span class="sidebar-icon gray">ℹ️</span>
+                <span>About</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Tab Contents -->
+          <div class="window-detail">
+            <!-- Appearance Tab -->
+            <div class="tab-pane active" id="pane-appearance">
+              <h3 class="pane-title">Appearance</h3>
+              <p class="pane-desc">Tune the visual materials and physical optics of the desktop fold.</p>
+
+              <div class="setting-group">
+                <div class="group-title">MATERIAL STYLE</div>
+                <div class="style-cards-grid">
+                  <div class="web-style-card active" data-web-style="silk">
+                    <div class="card-icon">✨</div>
+                    <div class="card-name">Silk</div>
+                    <div class="card-desc">Fluid highlights</div>
+                  </div>
+                  <div class="web-style-card" data-web-style="shade">
+                    <div class="card-icon">🌑</div>
+                    <div class="card-name">Shade</div>
+                    <div class="card-desc">Deep shadow</div>
+                  </div>
+                  <div class="web-style-card" data-web-style="frost">
+                    <div class="card-icon">❄️</div>
+                    <div class="card-name">Frost</div>
+                    <div class="card-desc">Liquid glass</div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="setting-group sliders-group">
+                <div class="setting-row">
+                  <span class="row-label">Perspective</span>
+                  <input type="range" class="mini-slider" min="0" max="100" value="85">
+                  <span class="row-value">85%</span>
+                </div>
+                <div class="setting-row">
+                  <span class="row-label">Variable Bokeh</span>
+                  <input type="range" class="mini-slider" min="0" max="100" value="65">
+                  <span class="row-value">65%</span>
+                </div>
+                <div class="setting-row">
+                  <span class="row-label">Ridge Glint & Shadow</span>
+                  <input type="range" class="mini-slider" min="0" max="100" value="55">
+                  <span class="row-value">55%</span>
+                </div>
+              </div>
+
+              <div class="setting-group exit-angle-group">
+                <div class="exit-row">
+                  <div>
+                    <strong>Clear Angle (110°)</strong>
+                    <p class="subtext">The fold disappears smoothly when the lid opens past this angle.</p>
+                  </div>
+                  <input type="range" class="mini-slider" min="90" max="145" value="110">
+                </div>
+              </div>
+            </div>
+
+            <!-- General Tab -->
+            <div class="tab-pane" id="pane-general">
+              <h3 class="pane-title">General</h3>
+              <div class="setting-group">
+                <div class="toggle-row">
+                  <div>
+                    <strong>Enable Foldy</strong>
+                    <p class="subtext">Render physical depth and perspective when lid moves.</p>
+                  </div>
+                  <input type="checkbox" class="apple-toggle" checked>
+                </div>
+                <div class="toggle-row">
+                  <div>
+                    <strong>Launch at login</strong>
+                    <p class="subtext">Start automatically in background.</p>
+                  </div>
+                  <input type="checkbox" class="apple-toggle" checked>
+                </div>
+                <div class="toggle-row">
+                  <div>
+                    <strong>Play sound when desktop opens</strong>
+                    <p class="subtext">Organic mechanical latch audio chime.</p>
+                  </div>
+                  <input type="checkbox" class="apple-toggle" checked>
+                </div>
+              </div>
+            </div>
+
+            <!-- Support Tab -->
+            <div class="tab-pane" id="pane-support">
+              <h3 class="pane-title">Support Foldy</h3>
+              <div class="support-card-content">
+                <div class="support-cup-icon">☕️</div>
+                <h4>Buy Me a Coffee</h4>
+                <p>Foldy is 100% free and open-source. If you enjoy having physical fluid folds on your Mac, consider buying me a coffee on Ko-fi to support continuous updates!</p>
+                <a href="https://ko-fi.com/tejastelkar" target="_blank" rel="noopener" class="kofi-submit-btn">
+                  Open Ko-fi Page ↗
+                </a>
+              </div>
+            </div>
+
+            <!-- About Tab -->
+            <div class="tab-pane" id="pane-about">
+              <div class="about-pane-content">
+                <img src="/assets/icon.png" width="72" height="72" alt="Foldy App Icon" class="about-icon">
+                <h3 class="about-title">Foldy</h3>
+                <span class="about-ver">Version 1.0 (Build 1)</span>
+                <p class="about-copy">Desktop depth & hinge kinetics for macOS</p>
+                <div class="about-badges">
+                  <span class="about-pill">🔒 Private by Design</span>
+                  <span class="about-pill">⚡️ Metal 3 Shaders</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Architecture & Features Grid -->
+    <div class="stack">
+      <section class="card">
+        <h2>How it works</h2>
+        <dl>
+          <div class="row">
+            <dt>IOKit Lid Sensor</dt>
+            <dd>Reads the hardware hinge angle directly from the Mac's embedded IOKit HID sensor. Zero polling, zero CPU when idle, zero battery drain.</dd>
+          </div>
+          <div class="row">
+            <dt>Metal 3 Pipeline</dt>
+            <dd>Hardware-accelerated ScreenCaptureKit frame projection. Live desktop windows and wallpaper tilt, fold, and shade in unified memory at 120Hz ProMotion.</dd>
+          </div>
+          <div class="row">
+            <dt>Three Fluid Styles</dt>
+            <dd><strong>Silk</strong>, <strong>Shade</strong>, and <strong>Frost</strong>. Customize perspective pitch, 12-tap Poisson disc bokeh, liquid glass chromatic dispersion, and ambient horizon shadows.</dd>
+          </div>
+          <div class="row">
+            <dt>Mechanical Audio</dt>
+            <dd>A crisp, soft haptic sound when the lid opens and the desktop clears. Switch it off in General settings anytime.</dd>
+          </div>
+          <div class="row">
+            <dt>Quiet Menu Bar</dt>
+            <dd>Lives unobtrusively in your macOS menu bar. Pause with a click or configure whenever you need.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="card">
+        <h2>Requirements</h2>
+        <dl>
+          <div class="row">
+            <dt>Operating System</dt>
+            <dd>macOS 14 Sonoma, macOS 15 Sequoia, or newer.</dd>
+          </div>
+          <div class="row">
+            <dt>Hardware</dt>
+            <dd>Apple Silicon MacBook (MacBook Air or MacBook Pro with M1, M2, M3, or M4 chip) equipped with a lid angle sensor.</dd>
+          </div>
+          <div class="row">
+            <dt>Permissions</dt>
+            <dd>Screen Recording access (strictly used in GPU RAM for the tilt shader; frames never leave memory).</dd>
+          </div>
+        </dl>
+      </section>
+
+      <section class="card">
+        <h2>Private by Design</h2>
+        <dl>
+          <div class="row">
+            <dt>100% On-Device</dt>
+            <dd>Screen frames are captured directly to Metal textures in unified memory and discarded instantly. Nothing is ever saved to disk, tracked, or sent over the network.</dd>
+          </div>
+          <div class="row">
+            <dt>Zero Telemetry</dt>
+            <dd>No user tracking, no analytics SDKs, no accounts required. Free, open source, and completely transparent.</dd>
+          </div>
+        </dl>
+      </section>
+
+      <footer>
+        <div class="footer-left">
+          <span>© <span id="year"></span> Foldy. Created by <a href="https://github.com/tejastelkar" target="_blank" rel="noopener">Tejas Telkar</a>.</span>
+        </div>
+        <nav class="links">
+          <a href="/assets/Foldy.dmg" download="Foldy.dmg">Download DMG</a>
+          <a href="https://github.com/tejastelkar/foldy" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://ko-fi.com/tejastelkar" target="_blank" rel="noopener">Ko-fi</a>
+        </nav>
+      </footer>
+    </div>
+  </main>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>

@@ -7,71 +7,142 @@ struct MenuBarContentView: View {
     let showPreview: () -> Void
     let showSettings: () -> Void
 
+    @State private var hasScreenAccess = CGPreflightScreenCaptureAccess()
+
     var body: some View {
-        VStack(alignment: .leading, spacing: 14) {
-            HStack(spacing: 10) {
+        VStack(alignment: .leading, spacing: 13) {
+            HStack(spacing: 11) {
                 ZStack {
-                    RoundedRectangle(cornerRadius: 10, style: .continuous)
-                        .fill(FoldyTheme.duoGradient)
-                    Image(systemName: "macbook")
-                        .font(.system(size: 18, weight: .semibold))
-                        .foregroundStyle(.white)
+                    RoundedRectangle(cornerRadius: 9, style: .continuous)
+                        .fill(.quaternary)
+                        .overlay {
+                            RoundedRectangle(cornerRadius: 9, style: .continuous)
+                                .stroke(Color.white.opacity(0.12), lineWidth: 0.5)
+                        }
+                    Image(systemName: "macbook.gen2")
+                        .font(.system(size: 17, weight: .medium))
+                        .foregroundStyle(.primary)
                 }
-                .frame(width: 38, height: 38)
-                .shadow(color: FoldyTheme.blue.opacity(0.28), radius: 10, y: 5)
+                .frame(width: 34, height: 34)
+
                 VStack(alignment: .leading, spacing: 1) {
-                    Text("Foldy").font(.headline.weight(.semibold))
-                    Text("Desktop motion, beautifully tuned").font(.caption).foregroundStyle(.secondary)
+                    Text("Foldy")
+                        .font(.headline.weight(.semibold))
+                    Text(statusSubtitle)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
                 }
             }
 
-            Toggle("Enable Foldy", isOn: Binding(
-                get: { model.isEnabled },
-                set: {
-                    configureModel()
-                    settings.effectEnabled = $0
-                    model.setEnabled($0)
-                }
-            ))
+            Divider()
 
             HStack {
+                Text("Enable Foldy")
+                    .font(.body)
+                Spacer()
+                Toggle("", isOn: Binding(
+                    get: { model.isEnabled },
+                    set: {
+                        configureModel()
+                        settings.effectEnabled = $0
+                        model.setEnabled($0)
+                    }
+                ))
+                .toggleStyle(.switch)
+                .labelsHidden()
+            }
+
+            HStack(spacing: 6) {
                 Circle()
-                    .fill(model.isEnabled ? FoldyTheme.mint : Color.secondary)
-                    .frame(width: 7, height: 7)
-                Text(model.currentAngle.map { "Live angle: \(Int($0.rounded()))°" } ?? compatibilityText)
-                    .font(.caption)
-                    .foregroundStyle(.secondary)
+                    .fill(statusColor)
+                    .frame(width: 6, height: 6)
+                if let angle = model.currentAngle {
+                    Text("Lid angle:")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                    Text("\(Int(angle.rounded()))°")
+                        .font(.caption.monospacedDigit().weight(.medium))
+                        .foregroundStyle(.primary)
+                } else {
+                    Text(compatibilityText)
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+            }
+
+            if !hasScreenAccess {
+                HStack(spacing: 6) {
+                    Image(systemName: "exclamationmark.triangle.fill")
+                        .foregroundStyle(.orange)
+                        .font(.caption)
+                    Text("Screen recording access needed")
+                        .font(.caption)
+                        .foregroundStyle(.secondary)
+                }
+                Button("Request Access") {
+                    _ = CGRequestScreenCaptureAccess()
+                    PrivacySettingsDestination.screenRecording.open()
+                }
+                .buttonStyle(.borderedProminent)
+                .controlSize(.small)
             }
 
             if let error = model.errorMessage {
-                Text(error).font(.caption).foregroundStyle(.red)
+                Text(error)
+                    .font(.caption)
+                    .foregroundStyle(.red)
                     .fixedSize(horizontal: false, vertical: true)
             }
+
+            Divider()
 
             Button("Preview Effect…") {
                 showPreview()
             }
+            .buttonStyle(.plain)
+            .padding(.vertical, 2)
 
             Button("Settings…") {
                 showSettings()
             }
+            .buttonStyle(.plain)
+            .padding(.vertical, 2)
             .keyboardShortcut(",")
 
             Divider()
-            Button("Quit Foldy") { NSApplication.shared.terminate(nil) }
-                .keyboardShortcut("q")
+
+            Button("Quit Foldy") {
+                NSApplication.shared.terminate(nil)
+            }
+            .buttonStyle(.plain)
+            .padding(.vertical, 2)
+            .keyboardShortcut("q")
         }
-        .padding(16)
-        .frame(width: 280)
-        .tint(FoldyTheme.blue)
-        .background(FoldyTheme.duoGradient.opacity(0.055))
-        .onAppear(perform: configureModel)
+        .padding(14)
+        .frame(width: 260)
+        .onAppear {
+            configureModel()
+            hasScreenAccess = CGPreflightScreenCaptureAccess()
+        }
+    }
+
+    private var statusSubtitle: String {
+        if model.isEnabled {
+            return "Active"
+        }
+        return "Inactive"
+    }
+
+    private var statusColor: Color {
+        if !hasScreenAccess { return .orange }
+        if model.isEnabled { return FoldyTheme.mint }
+        return .secondary.opacity(0.6)
     }
 
     private var compatibilityText: String {
         switch model.sensorAvailability {
         case .unknown: "Checking lid sensor…"
-        case .available: "Lid sensor ready"
+        case .available: "Hinge sensor ready"
         case .unavailable(let reason): reason
         }
     }

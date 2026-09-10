@@ -33,6 +33,14 @@ vertex VertexOut foldVertex(uint vertexID [[vertex_id]]) {
     return output;
 }
 
+// Signed distance to rounded rectangle for subpixel continuous squircles
+static inline float sdRoundedBox(float2 p, float2 b, float4 r) {
+    r.xy = (p.x > 0.0) ? r.xy : r.zw;
+    r.x  = (p.y > 0.0) ? r.x  : r.y;
+    float2 q = abs(p) - b + r.x;
+    return min(max(q.x, q.y), 0.0) + length(max(q, 0.0)) - r.x;
+}
+
 fragment float4 foldFragment(
     VertexOut input [[stage_in]],
     texture2d<float> screenTexture [[texture(0)]],
@@ -40,54 +48,121 @@ fragment float4 foldFragment(
     constexpr sampler screenSampler(coord::normalized, address::clamp_to_edge, filter::linear);
 
     float p = clamp(parameters.progress, 0.0, 1.0);
-    float planeHeight = mix(1.0, 0.10, p * p);
-    float planeTop = (1.0 - planeHeight) * 0.62;
-    float localY = (input.uv.y - planeTop) / planeHeight;
-
-    if (localY < 0.0 || localY > 1.0) {
-        return float4(0.006, 0.008, 0.014, 1.0);
+    if (p <= 0.0001) {
+        return screenTexture.sample(screenSampler, input.uv);
     }
 
-    float taper = p * 0.16 * (1.0 - localY);
-    float halfWidth = 0.5 * (1.0 - taper);
+    float aspect = max(parameters.aspectRatio, 0.1);
+
+    // Subtle Apple dark graphite ambient vignette backdrop
+    float2 bgCenter = input.uv - float2(0.5, 0.5);
+    float bgDist = length(float2(bgCenter.x * aspect, bgCenter.y));
+    float3 bgColor = mix(float3(0.018, 0.020, 0.026), float3(0.004, 0.005, 0.008), smoothstep(0.25, 0.88, bgDist));
+
+    // Grounded at the bottom hinge (uv.y = 1.0).
+    // As lid closes (p -> 1.0), the top edge tilts down toward the bottom hinge.
+    float panelHeight = mix(1.0, 0.10, p * (0.80 + 0.20 * parameters.perspective));
+    float panelBottom = 1.0;
+    float panelTop = panelBottom - panelHeight;
+
+    // Contact drop shadow cast onto the background behind the tilting top edge
+    float shadowDist = abs(input.uv.y - panelTop);
+    if (input.uv.y < panelTop && shadowDist < 0.16) {
+        float shadowIntensity = (1.0 - shadowDist / 0.16) * p * (0.50 + 0.50 * parameters.shadow);
+        bgColor *= (1.0 - shadowIntensity * 0.75);
+    }
+
+    if (input.uv.y < panelTop || input.uv.y > panelBottom) {
+        return float4(bgColor, 1.0);
+    }
+
+    // localY runs from 0.0 at the top edge of the panel to 1.0 at the bottom hinge
+    float localY = (input.uv.y - panelTop) / panelHeight;
+    float tiltFactor = 1.0 - localY; // 1.0 at top edge, 0.0 at hinge
+
+    // 3D Perspective Pitch: top edge recedes into the distance (Z), narrowing the top
+    float distanceZ = tiltFactor * p * parameters.perspective;
+    float perspectiveScale = 1.0 / (1.0 + distanceZ * 0.95);
+    float halfWidth = 0.5 * perspectiveScale;
     float centeredX = input.uv.x - 0.5;
+
     if (abs(centeredX) > halfWidth) {
-        return float4(0.006, 0.008, 0.014, 1.0);
+        return float4(bgColor, 1.0);
     }
 
-    float2 sourceUV = float2(centeredX / (halfWidth * 2.0) + 0.5, localY);
-    float bend = sin(sourceUV.y * M_PI_F) * parameters.perspective * 0.035;
-    sourceUV.x += (sourceUV.x - 0.5) * bend;
+    float2 panelUV = float2(centeredX / (halfWidth * 2.0) + 0.5, localY);
 
-    float frost = clamp(parameters.frost, 0.0, 1.0);
-    float blurStep = parameters.blur * mix(0.0028, 0.0068, frost) * (0.28 + p * 0.72);
-    float2 diagonal = float2(blurStep / max(parameters.aspectRatio, 1.0), blurStep);
-    float4 color = float4(0.0);
-    color += screenTexture.sample(screenSampler, sourceUV) * 0.28;
-    color += screenTexture.sample(screenSampler, sourceUV + float2(0, -3 * blurStep)) * 0.10;
-    color += screenTexture.sample(screenSampler, sourceUV + float2(0, -2 * blurStep)) * 0.12;
-    color += screenTexture.sample(screenSampler, sourceUV + float2(0, -blurStep)) * 0.14;
-    color += screenTexture.sample(screenSampler, sourceUV + float2(0, blurStep)) * 0.14;
-    color += screenTexture.sample(screenSampler, sourceUV + float2(0, 2 * blurStep)) * 0.12;
-    color += screenTexture.sample(screenSampler, sourceUV + float2(0, 3 * blurStep)) * 0.10;
-    color += screenTexture.sample(screenSampler, sourceUV + diagonal * float2(-2, -2)) * (0.05 * frost);
-    color += screenTexture.sample(screenSampler, sourceUV + diagonal * float2(2, -2)) * (0.05 * frost);
-    color += screenTexture.sample(screenSampler, sourceUV + diagonal * float2(-2, 2)) * (0.05 * frost);
-    color += screenTexture.sample(screenSampler, sourceUV + diagonal * float2(2, 2)) * (0.05 * frost);
-    color.rgb /= 1.0 + 0.20 * frost;
+    // Continuous squircle corner clipping
+    float cornerRadius = 0.024;
+    float2 boxSize = float2(0.5 - cornerRadius, 0.5 - cornerRadius);
+    float dBox = sdRoundedBox(panelUV - float2(0.5, 0.5), boxSize, float4(cornerRadius));
+    float edgeAA = smoothstep(0.003, -0.003, dBox);
 
-    float horizonShade = p * (1.0 - sourceUV.y) * (0.08 + parameters.shadow * 0.24);
-    color.rgb *= 1.0 - horizonShade;
-    if (frost > 0.5) {
-        float luminance = dot(color.rgb, float3(0.2126, 0.7152, 0.0722));
-        color.rgb = mix(color.rgb, float3(luminance), 0.24 + p * 0.18);
-        float glassStrength = (0.18 + parameters.blur * 0.20) * (0.30 + p * 0.70);
-        color.rgb = mix(color.rgb, float3(0.69, 0.85, 1.0), glassStrength);
-        float bloom = pow(1.0 - sourceUV.y, 2.0) * p * 0.12;
-        color.rgb += float3(0.30, 0.64, 1.0) * bloom;
-    } else if (parameters.styleMode > 0.5) {
-        color.rgb *= 1.0 - p * parameters.shadow * 0.13;
+    // Top edge progressive feather softening along with the bend
+    float topFeather = smoothstep(0.0, 0.08 * p, localY);
+    edgeAA *= mix(1.0, topFeather, p * 0.85);
+
+    if (edgeAA <= 0.0) {
+        return float4(bgColor, 1.0);
     }
-    color.rgb *= 1.0 - parameters.dim * 0.88;
-    return float4(color.rgb, 1.0);
+
+    // Organic cylindrical curvature roll near the hinge
+    float roll = sin(localY * M_PI_F) * 0.012 * parameters.perspective * p;
+    panelUV.y += roll * (1.0 - localY);
+
+    // Isotropic 2D Poisson disc depth-of-field bokeh (top edge defocuses progressively)
+    constexpr float2 poisson[12] = {
+        float2(-0.326, -0.406), float2(-0.840, -0.074),
+        float2(-0.696,  0.457), float2(-0.203,  0.621),
+        float2( 0.962, -0.195), float2( 0.473, -0.480),
+        float2( 0.519,  0.767), float2( 0.185, -0.893),
+        float2( 0.507,  0.064), float2( 0.896,  0.412),
+        float2(-0.322, -0.933), float2(-0.792, -0.598)
+    };
+
+    float dofBlur = parameters.blur * (0.0015 + 0.010 * tiltFactor) * p;
+    float2 blurRadius = float2(dofBlur / aspect, dofBlur);
+
+    float4 color = screenTexture.sample(screenSampler, panelUV) * 0.22;
+    for (int i = 0; i < 12; i++) {
+        float2 sampleOffset = poisson[i] * blurRadius;
+        color += screenTexture.sample(screenSampler, panelUV + sampleOffset) * 0.065;
+    }
+
+    // Glass chromatic dispersion (subtle optical prism along the fold)
+    if (parameters.frost > 0.5) {
+        float disp = 0.0035 * p * parameters.blur * tiltFactor;
+        float rSample = screenTexture.sample(screenSampler, panelUV + float2(disp, 0.0)).r;
+        float bSample = screenTexture.sample(screenSampler, panelUV - float2(disp, 0.0)).b;
+        color.r = mix(color.r, rSample, 0.35);
+        color.b = mix(color.b, bSample, 0.35);
+
+        // Apple liquid glass sheen
+        float sheen = pow(tiltFactor, 2.2) * p * 0.18;
+        color.rgb += float3(0.85, 0.92, 1.0) * sheen;
+    }
+
+    // Specular ridge glint catching ambient lighting along the top edge
+    float specularGlint = pow(max(0.0, 1.0 - abs(localY - 0.04)), 24.0) * p * 0.20;
+    color.rgb += float3(1.0, 1.0, 1.0) * specularGlint;
+
+    // Contact ambient shadow & horizon falloff (darkens towards the top as it tilts away)
+    float horizonFalloff = p * tiltFactor * (0.08 + parameters.shadow * 0.26);
+    color.rgb *= (1.0 - horizonFalloff);
+
+    // Style mode shading
+    if (parameters.styleMode > 0.5 && parameters.styleMode < 1.5) {
+        color.rgb *= (1.0 - p * parameters.shadow * 0.18);
+    }
+
+    // Micro-specular glass bevel rim
+    float bevel = smoothstep(-0.012, 0.0, dBox) * (1.0 - smoothstep(0.0, 0.008, dBox));
+    color.rgb += float3(0.92, 0.96, 1.0) * bevel * 0.25 * (1.0 + p);
+
+    // Dimming near complete close
+    color.rgb *= (1.0 - parameters.dim * 0.85);
+
+    // Anti-aliased composite over background
+    float3 finalRgb = mix(bgColor, color.rgb, edgeAA);
+    return float4(finalRgb, 1.0);
 }

@@ -35,7 +35,7 @@ final class ScreenCaptureService: NSObject, ScreenCaptureServicing {
         let configuration = SCStreamConfiguration()
         configuration.width = display.width
         configuration.height = display.height
-        configuration.minimumFrameInterval = CMTime(value: 1, timescale: 30)
+        configuration.minimumFrameInterval = CMTime(value: 1, timescale: 60)
         configuration.queueDepth = 3
         configuration.pixelFormat = kCVPixelFormatType_32BGRA
         configuration.showsCursor = true
