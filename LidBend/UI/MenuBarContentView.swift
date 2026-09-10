@@ -3,6 +3,7 @@ import SwiftUI
 
 struct MenuBarContentView: View {
     @ObservedObject var model: AppModel
+    @Environment(\.openWindow) private var openWindow
 
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
@@ -27,6 +28,11 @@ struct MenuBarContentView: View {
                     set: { model.setEnabled($0) }
                 )
             )
+
+            Button("Preview effect…") {
+                openWindow(id: "preview")
+                NSApplication.shared.activate(ignoringOtherApps: true)
+            }
 
             Divider()
 

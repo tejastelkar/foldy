@@ -9,5 +9,10 @@ struct LidBendApp: App {
             MenuBarContentView(model: model)
         }
         .menuBarExtraStyle(.window)
+
+        Window("Fold Preview", id: "preview") {
+            PreviewView()
+        }
+        .windowResizability(.contentSize)
     }
 }
