@@ -1,0 +1,452 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AD5E423E9C1232F054EC8A1B /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DDC414CC93C4B7C156B877B /* AppModel.swift */; };
+		BFC0453CCD36A191EA1AE26A /* AppModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 58D92B4BE40AE72ACEE5A0A5 /* AppModelTests.swift */; };
+		E0EB6FDE8EAA882C4E89F4F5 /* LidBendApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BAE687A5764EE8DE6A2A59A /* LidBendApp.swift */; };
+		E768E4788A80ECDAA03A9B62 /* MenuBarContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E9FE050F2C2F046401FD5EC /* MenuBarContentView.swift */; };
+		F2E422CEDF4A5FCB6746B3BB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AE3F5B519690540F6289696C /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		13ACFBF3C9AEE6873EEE741D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8D4AD5AE1984B8F8DAE0C3D8 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = FBB5726DFDAA43F7D88ED937;
+			remoteInfo = LidBend;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		1AA75E0BC52881BAAEBC5E7C /* LidBendTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LidBendTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3BAE687A5764EE8DE6A2A59A /* LidBendApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidBendApp.swift; sourceTree = "<group>"; };
+		3E9FE050F2C2F046401FD5EC /* MenuBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContentView.swift; sourceTree = "<group>"; };
+		58D92B4BE40AE72ACEE5A0A5 /* AppModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModelTests.swift; sourceTree = "<group>"; };
+		67F058785FE61D599B0C8C97 /* LidBend.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = LidBend.entitlements; sourceTree = "<group>"; };
+		6DDC414CC93C4B7C156B877B /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		AB33FDA31E46E898E21258A5 /* LidBend.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = LidBend.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AE3F5B519690540F6289696C /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXGroup section */
+		0C0418F9EF393980DEDF30D5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AB33FDA31E46E898E21258A5 /* LidBend.app */,
+				1AA75E0BC52881BAAEBC5E7C /* LidBendTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		306EAAD5B226B6AA45B05AA6 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				6DDC414CC93C4B7C156B877B /* AppModel.swift */,
+				3BAE687A5764EE8DE6A2A59A /* LidBendApp.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		39152BD43A7BFE5FE654805E = {
+			isa = PBXGroup;
+			children = (
+				54E93DC75D64490DC72796B4 /* LidBend */,
+				3DC9B3790C49E80F08A8052C /* LidBendTests */,
+				0C0418F9EF393980DEDF30D5 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		3DC9B3790C49E80F08A8052C /* LidBendTests */ = {
+			isa = PBXGroup;
+			children = (
+				58D92B4BE40AE72ACEE5A0A5 /* AppModelTests.swift */,
+			);
+			path = LidBendTests;
+			sourceTree = "<group>";
+		};
+		54E93DC75D64490DC72796B4 /* LidBend */ = {
+			isa = PBXGroup;
+			children = (
+				67F058785FE61D599B0C8C97 /* LidBend.entitlements */,
+				306EAAD5B226B6AA45B05AA6 /* App */,
+				D2433A70213794E44D1ECD0A /* Resources */,
+				B73710FE6B110F03438902EC /* UI */,
+			);
+			path = LidBend;
+			sourceTree = "<group>";
+		};
+		B73710FE6B110F03438902EC /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				3E9FE050F2C2F046401FD5EC /* MenuBarContentView.swift */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		D2433A70213794E44D1ECD0A /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AE3F5B519690540F6289696C /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		534966B98B9400AE26742271 /* LidBendTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8EA299F8E2F07BAF0D55AA0 /* Build configuration list for PBXNativeTarget "LidBendTests" */;
+			buildPhases = (
+				DDF8F6B28B60B15B73B6AD48 /* Sources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D147435CCB72C0545FD64CFF /* PBXTargetDependency */,
+			);
+			name = LidBendTests;
+			packageProductDependencies = (
+			);
+			productName = LidBendTests;
+			productReference = 1AA75E0BC52881BAAEBC5E7C /* LidBendTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		FBB5726DFDAA43F7D88ED937 /* LidBend */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 6D57842F907E374105FFF519 /* Build configuration list for PBXNativeTarget "LidBend" */;
+			buildPhases = (
+				EA6209EF0FAE38EF0B474EAE /* Sources */,
+				B82F9CB533937F2A880FDFC3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = LidBend;
+			packageProductDependencies = (
+			);
+			productName = LidBend;
+			productReference = AB33FDA31E46E898E21258A5 /* LidBend.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8D4AD5AE1984B8F8DAE0C3D8 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = YES;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					534966B98B9400AE26742271 = {
+						ProvisioningStyle = Automatic;
+					};
+					FBB5726DFDAA43F7D88ED937 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = 1119105C5A6BA832A21515C2 /* Build configuration list for PBXProject "LidBend" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				Base,
+				en,
+			);
+			mainGroup = 39152BD43A7BFE5FE654805E;
+			minimizedProjectReferenceProxies = 1;
+			preferredProjectObjectVersion = 77;
+			productRefGroup = 0C0418F9EF393980DEDF30D5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				FBB5726DFDAA43F7D88ED937 /* LidBend */,
+				534966B98B9400AE26742271 /* LidBendTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B82F9CB533937F2A880FDFC3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F2E422CEDF4A5FCB6746B3BB /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DDF8F6B28B60B15B73B6AD48 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BFC0453CCD36A191EA1AE26A /* AppModelTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		EA6209EF0FAE38EF0B474EAE /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AD5E423E9C1232F054EC8A1B /* AppModel.swift in Sources */,
+				E0EB6FDE8EAA882C4E89F4F5 /* LidBendApp.swift in Sources */,
+				E768E4788A80ECDAA03A9B62 /* MenuBarContentView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D147435CCB72C0545FD64CFF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = FBB5726DFDAA43F7D88ED937 /* LidBend */;
+			targetProxy = 13ACFBF3C9AEE6873EEE741D /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		05EE70BEAFFBDF621CEFFC14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LidBend/LidBend.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LidBend;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSScreenCaptureUsageDescription = "LidBend captures your desktop only while rendering the fold effect. Frames stay on your Mac and are never saved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lidbend.app;
+				PRODUCT_NAME = LidBend;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		42C72DA1D79103B69B05EDC6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Release;
+		};
+		BFAEEA1CC0C4F19EB9C846F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = arm64;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"$(inherited)",
+					"DEBUG=1",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 14.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 6.0;
+			};
+			name = Debug;
+		};
+		C95ADF64C6962F7B419483F1 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lidbend.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LidBend.app/Contents/MacOS/LidBend";
+			};
+			name = Release;
+		};
+		F4736039EC1750E102F20042 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = LidBend/LidBend.entitlements;
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = LidBend;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.entertainment";
+				INFOPLIST_KEY_LSUIElement = YES;
+				INFOPLIST_KEY_NSScreenCaptureUsageDescription = "LidBend captures your desktop only while rendering the fold effect. Frames stay on your Mac and are never saved.";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lidbend.app;
+				PRODUCT_NAME = LidBend;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		F96E1ABE20586FBD5EE421A3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				COMBINE_HIDPI_IMAGES = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+					"@loader_path/../Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.lidbend.tests;
+				SDKROOT = macosx;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/LidBend.app/Contents/MacOS/LidBend";
+			};
+			name = Debug;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		1119105C5A6BA832A21515C2 /* Build configuration list for PBXProject "LidBend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BFAEEA1CC0C4F19EB9C846F4 /* Debug */,
+				42C72DA1D79103B69B05EDC6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		6D57842F907E374105FFF519 /* Build configuration list for PBXNativeTarget "LidBend" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F4736039EC1750E102F20042 /* Debug */,
+				05EE70BEAFFBDF621CEFFC14 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		D8EA299F8E2F07BAF0D55AA0 /* Build configuration list for PBXNativeTarget "LidBendTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F96E1ABE20586FBD5EE421A3 /* Debug */,
+				C95ADF64C6962F7B419483F1 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8D4AD5AE1984B8F8DAE0C3D8 /* Project object */;
+}

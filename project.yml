@@ -1,0 +1,48 @@
+name: LidBend
+options:
+  createIntermediateGroups: true
+  deploymentTarget:
+    macOS: "14.0"
+settings:
+  base:
+    SWIFT_VERSION: "6.0"
+    ARCHS: arm64
+    CODE_SIGN_STYLE: Automatic
+targets:
+  LidBend:
+    type: application
+    platform: macOS
+    sources:
+      - path: LidBend
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lidbend.app
+        PRODUCT_NAME: LidBend
+        GENERATE_INFOPLIST_FILE: YES
+        INFOPLIST_KEY_LSUIElement: YES
+        INFOPLIST_KEY_CFBundleDisplayName: LidBend
+        INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.entertainment
+        INFOPLIST_KEY_NSScreenCaptureUsageDescription: LidBend captures your desktop only while rendering the fold effect. Frames stay on your Mac and are never saved.
+        ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+    entitlements:
+      path: LidBend/LidBend.entitlements
+  LidBendTests:
+    type: bundle.unit-test
+    platform: macOS
+    sources:
+      - path: LidBendTests
+    dependencies:
+      - target: LidBend
+    settings:
+      base:
+        PRODUCT_BUNDLE_IDENTIFIER: com.lidbend.tests
+        GENERATE_INFOPLIST_FILE: YES
+schemes:
+  LidBend:
+    build:
+      targets:
+        LidBend: all
+        LidBendTests: [test]
+    test:
+      targets:
+        - LidBendTests
