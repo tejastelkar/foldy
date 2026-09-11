@@ -98,6 +98,7 @@ final class OverlayCoordinator: OverlayCoordinating {
         panel.hasShadow = false
         panel.ignoresMouseEvents = true
         panel.hidesOnDeactivate = false
+        panel.sharingType = .none
         panel.collectionBehavior = [.canJoinAllSpaces, .fullScreenAuxiliary, .stationary]
         panel.contentView = metalView
         panel.orderFrontRegardless()
