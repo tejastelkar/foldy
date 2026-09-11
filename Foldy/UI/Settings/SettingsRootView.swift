@@ -592,7 +592,7 @@ private struct AboutSettingsView: View {
                         .padding(.vertical, 5)
                         .background(.quaternary, in: Capsule())
 
-                    Label("Metal 3 Shaders", systemImage: "sparkles")
+                    Label("Metal Accelerated", systemImage: "sparkles")
                         .font(.caption.weight(.medium))
                         .padding(.horizontal, 10)
                         .padding(.vertical, 5)

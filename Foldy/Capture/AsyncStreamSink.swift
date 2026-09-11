@@ -7,12 +7,16 @@ import Foundation
 /// the continuation during that handoff and makes finish terminal for the
 /// current stream.
 final class AsyncStreamSink<Element: Sendable>: @unchecked Sendable {
+    typealias BufferingPolicy = AsyncStream<Element>.Continuation.BufferingPolicy
+
     private let lock = NSLock()
     private var streamStorage: AsyncStream<Element>
     private var continuation: AsyncStream<Element>.Continuation?
+    private let bufferingPolicy: BufferingPolicy
 
-    init() {
-        let pair = AsyncStream.makeStream(of: Element.self)
+    init(bufferingPolicy: BufferingPolicy = .unbounded) {
+        self.bufferingPolicy = bufferingPolicy
+        let pair = AsyncStream.makeStream(of: Element.self, bufferingPolicy: bufferingPolicy)
         streamStorage = pair.stream
         continuation = pair.continuation
     }
@@ -26,7 +30,7 @@ final class AsyncStreamSink<Element: Sendable>: @unchecked Sendable {
     func reset() -> AsyncStream<Element> {
         lock.lock()
         let oldContinuation = continuation
-        let pair = AsyncStream.makeStream(of: Element.self)
+        let pair = AsyncStream.makeStream(of: Element.self, bufferingPolicy: bufferingPolicy)
         streamStorage = pair.stream
         continuation = pair.continuation
         lock.unlock()

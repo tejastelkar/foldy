@@ -1,6 +1,6 @@
 # Foldy
 
-Foldy is a native macOS menu-bar app that makes the live desktop tilt, blur, crease, and settle as a compatible MacBook lid closes. It includes a manual preview for unsupported hardware and visual testing.
+Foldy is a native macOS menu-bar app that makes the live desktop tilt, soften, and settle as a compatible MacBook lid closes. It includes a manual preview for unsupported hardware and visual testing.
 
 Foldy is independent software. It is not affiliated with Apple or the Bendy product.
 

@@ -1,6 +1,7 @@
 import Metal
 import MetalKit
 import CoreVideo
+import QuartzCore
 
 @MainActor
 final class FoldRenderer: NSObject, MTKViewDelegate {
@@ -14,7 +15,11 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
     private let pipelineState: MTLRenderPipelineState
     private var texture: MTLTexture
     private var textureCache: CVMetalTextureCache?
-    private var parameters = FoldRenderParameters(state: .hidden, appearance: .silk, viewportSize: .zero)
+    private var targetParameters = FoldRenderParameters(state: .hidden, appearance: .silk, viewportSize: .zero)
+    private var parameterSmoother = FoldParameterSmoother(
+        initial: FoldRenderParameters(state: .hidden, appearance: .silk, viewportSize: .zero)
+    )
+    private var lastDrawTime: CFTimeInterval?
 
     init(view: MTKView) throws {
         guard let device = view.device ?? MTLCreateSystemDefaultDevice(),
@@ -22,7 +27,7 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
         else { throw RendererError.metalUnavailable }
 
         view.device = device
-        guard let library = try? device.makeLibrary(source: Self.shaderSource, options: nil),
+        guard let library = device.makeDefaultLibrary(),
               let vertex = library.makeFunction(name: "foldVertex"),
               let fragment = library.makeFunction(name: "foldFragment")
         else { throw RendererError.shaderUnavailable }
@@ -45,7 +50,7 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
     }
 
     func update(state: FoldState, appearance: FoldAppearance, viewportSize: CGSize) {
-        parameters = FoldRenderParameters(state: state, appearance: appearance, viewportSize: viewportSize)
+        targetParameters = FoldRenderParameters(state: state, appearance: appearance, viewportSize: viewportSize)
     }
 
     func update(texture: MTLTexture) {
@@ -76,7 +81,7 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
     }
 
     func mtkView(_ view: MTKView, drawableSizeWillChange size: CGSize) {
-        parameters.aspectRatio = size.height > 0 ? Float(size.width / size.height) : 1
+        targetParameters.aspectRatio = size.height > 0 ? Float(size.width / size.height) : 1
     }
 
     func draw(in view: MTKView) {
@@ -86,9 +91,21 @@ final class FoldRenderer: NSObject, MTKViewDelegate {
               let encoder = commandBuffer.makeRenderCommandEncoder(descriptor: pass)
         else { return }
 
+        let now = CACurrentMediaTime()
+        let elapsed = lastDrawTime.map { min(max(now - $0, 1.0 / 240.0), 0.1) } ?? (1.0 / 60.0)
+        lastDrawTime = now
+        var presentedParameters = parameterSmoother.step(
+            toward: targetParameters,
+            elapsed: elapsed
+        )
+
         encoder.setRenderPipelineState(pipelineState)
         encoder.setFragmentTexture(texture, index: 0)
-        encoder.setFragmentBytes(&parameters, length: MemoryLayout<FoldRenderParameters>.stride, index: 0)
+        encoder.setFragmentBytes(
+            &presentedParameters,
+            length: MemoryLayout<FoldRenderParameters>.stride,
+            index: 0
+        )
         encoder.drawPrimitives(type: .triangleStrip, vertexStart: 0, vertexCount: 4)
         encoder.endEncoding()
         commandBuffer.present(drawable)

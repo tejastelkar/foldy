@@ -11,6 +11,7 @@ final class ScreenCaptureService: NSObject, ScreenCaptureServicing {
 
     private var stream: SCStream?
     private var session: CaptureStreamSession?
+    private let qualityPolicy = RenderQualityPolicy()
     private let outputQueue = DispatchQueue(label: "com.foldy.capture", qos: .userInteractive)
 
     func start(displayID: CGDirectDisplayID) async throws {
@@ -33,13 +34,19 @@ final class ScreenCaptureService: NSObject, ScreenCaptureServicing {
             exceptingWindows: []
         )
         let configuration = SCStreamConfiguration()
-        configuration.width = display.width
-        configuration.height = display.height
+        let renderSize = qualityPolicy.renderSize(
+            sourceWidth: display.width,
+            sourceHeight: display.height
+        )
+        configuration.width = Int(renderSize.width)
+        configuration.height = Int(renderSize.height)
         configuration.minimumFrameInterval = CMTime(value: 1, timescale: 60)
-        configuration.queueDepth = 3
+        configuration.queueDepth = 2
         configuration.pixelFormat = kCVPixelFormatType_32BGRA
         configuration.showsCursor = true
         configuration.capturesAudio = false
+        configuration.scalesToFit = true
+        configuration.preservesAspectRatio = true
 
         let session = CaptureStreamSession()
         frames = session.frames
@@ -73,7 +80,7 @@ final class CaptureStreamSession: NSObject, @unchecked Sendable {
     private let sink: AsyncStreamSink<CapturedFrame>
 
     override init() {
-        let sink = AsyncStreamSink<CapturedFrame>()
+        let sink = AsyncStreamSink<CapturedFrame>(bufferingPolicy: .bufferingNewest(1))
         self.sink = sink
         frames = sink.stream
         super.init()

@@ -24,4 +24,24 @@ final class AngleSmootherTests: XCTestCase {
         XCTAssertFalse(smoother.isStale(at: 10.75))
         XCTAssertTrue(smoother.isStale(at: 10.751))
     }
+
+    func testAdaptiveMotionIsIndependentOfSensorFrequency() {
+        let thirtyHz = finalAngle(sampleRate: 30)
+        let sixtyHz = finalAngle(sampleRate: 60)
+
+        XCTAssertEqual(thirtyHz, sixtyHz, accuracy: 0.1)
+    }
+
+    private func finalAngle(sampleRate: Int) -> Double {
+        var smoother = AngleSmoother(adaptive: true)
+        var result = 110.0
+
+        for sample in 0...sampleRate {
+            let time = Double(sample) / Double(sampleRate)
+            let angle = 110.0 - 15.0 * time
+            result = smoother.ingest(angle: angle, at: time) ?? result
+        }
+
+        return result
+    }
 }

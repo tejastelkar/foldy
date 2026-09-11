@@ -14,8 +14,6 @@ targets:
     platform: macOS
     sources:
       - path: Foldy
-        excludes:
-          - Rendering/FoldShaders.metal
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.foldy.app

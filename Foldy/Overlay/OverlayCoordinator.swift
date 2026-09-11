@@ -60,17 +60,25 @@ final class OverlayCoordinator: OverlayCoordinating {
               let number = screen.deviceDescription[NSDeviceDescriptionKey("NSScreenNumber")] as? NSNumber
         else { throw ScreenCaptureError.displayUnavailable }
 
+        let displayID = CGDirectDisplayID(number.uint32Value)
+        let renderSize = RenderQualityPolicy().renderSize(
+            sourceWidth: Int(CGDisplayPixelsWide(displayID)),
+            sourceHeight: Int(CGDisplayPixelsHigh(displayID))
+        )
         let metalView = MTKView(frame: screen.frame, device: MTLCreateSystemDefaultDevice())
         metalView.autoresizingMask = [.width, .height]
+        metalView.autoResizeDrawable = false
+        metalView.drawableSize = renderSize
         metalView.colorPixelFormat = .bgra8Unorm
         metalView.clearColor = MTLClearColorMake(0.006, 0.008, 0.014, 1)
         metalView.preferredFramesPerSecond = 60
         metalView.enableSetNeedsDisplay = false
         metalView.isPaused = false
+        metalView.layer?.magnificationFilter = .linear
         let renderer = try FoldRenderer(view: metalView)
         metalView.delegate = renderer
 
-        try await captureService.start(displayID: CGDirectDisplayID(number.uint32Value))
+        try await captureService.start(displayID: displayID)
 
         guard presentationGate.isCurrent(token), pendingState?.isVisible == true else {
             await captureService.stop()

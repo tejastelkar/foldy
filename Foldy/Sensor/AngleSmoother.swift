@@ -18,19 +18,26 @@ struct AngleSmoother: Sendable {
     mutating func ingest(angle: Double, at time: TimeInterval) -> Double? {
         guard angle.isFinite, (0...180).contains(angle), time.isFinite else { return nil }
 
-        let effectiveAlpha: Double
-        if adaptive, let lastTime = lastValidSampleTime, let lastAngle = lastRawAngle, time > lastTime {
+        let next: Double
+        if adaptive,
+           let previous = smoothedAngle,
+           let lastTime = lastValidSampleTime,
+           let lastAngle = lastRawAngle,
+           time > lastTime {
             let dt = max(time - lastTime, 0.001)
             let speed = abs(angle - lastAngle) / dt
-            // Adaptive 1€ filter response:
-            // High smoothing (alpha ~ 0.18) at rest, snappy tracking (alpha ~ 0.80) in motion
             let speedFactor = min(speed / 45.0, 1.0)
-            effectiveAlpha = 0.18 + 0.62 * speedFactor
-        } else {
-            effectiveAlpha = alpha
-        }
+            let responseTime = 0.11 - 0.085 * speedFactor
+            let decay = exp(-dt / responseTime)
+            let slope = (angle - lastAngle) / dt
 
-        let next = smoothedAngle.map { $0 + effectiveAlpha * (angle - $0) } ?? angle
+            // Exact response for a linearly moving input. Unlike a per-sample
+            // alpha, this feels the same at 30, 60, or irregular sensor rates.
+            next = angle - slope * responseTime
+                + (previous - lastAngle + slope * responseTime) * decay
+        } else {
+            next = smoothedAngle.map { $0 + alpha * (angle - $0) } ?? angle
+        }
         smoothedAngle = next
         lastRawAngle = angle
         lastValidSampleTime = time
@@ -42,4 +49,3 @@ struct AngleSmoother: Sendable {
         return time - lastValidSampleTime > staleAfter
     }
 }
-
