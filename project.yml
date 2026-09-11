@@ -24,6 +24,7 @@ targets:
         INFOPLIST_KEY_LSApplicationCategoryType: public.app-category.entertainment
         INFOPLIST_KEY_NSScreenCaptureUsageDescription: Foldy captures your desktop only while rendering the fold effect. Frames stay on your Mac and are never saved.
         ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME: AccentColor
+        ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
     entitlements:
       path: Foldy/Foldy.entitlements
   FoldyTests:

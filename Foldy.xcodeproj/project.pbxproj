@@ -17,6 +17,7 @@
 		216FFEA5A30860997FF87D66 /* FoldRenderParametersTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEF75F1D01D43A652B3CD65E /* FoldRenderParametersTests.swift */; };
 		262CA8B27F818BAEE8951DDD /* AppSettingsTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D36CA41012B0C2A8F751C36F /* AppSettingsTests.swift */; };
 		295415AF8200D28280435182 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAFE8E0A6C7C4A556030341B /* AppSettings.swift */; };
+		30F5CA52B8A2FA839A037780 /* Foldy.icns in Resources */ = {isa = PBXBuildFile; fileRef = 3A13CA1E3ED4442C6CB2C4D5 /* Foldy.icns */; };
 		3147E878C2A84B392AC64914 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D01492DF0BAA7A4504425723 /* Assets.xcassets */; };
 		31BB2BC5AD3EFB181F297367 /* FoldStateMapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1E7001812323272358DFA6C /* FoldStateMapper.swift */; };
 		34E6DCE6A32DD7F80B9B2496 /* HIDAngleProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 835B2EE7FC2C19E611321C78 /* HIDAngleProvider.swift */; };
@@ -82,6 +83,7 @@
 		34B70A87CA394FB826748BCC /* OverlayPresentationGateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OverlayPresentationGateTests.swift; sourceTree = "<group>"; };
 		379B39D5A413A9EAC9121089 /* LidAngleProviding.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LidAngleProviding.swift; sourceTree = "<group>"; };
 		39BAC286E01EC4A266E9D70C /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		3A13CA1E3ED4442C6CB2C4D5 /* Foldy.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Foldy.icns; sourceTree = "<group>"; };
 		3BF9DE7AE40AD9E6BCEC9C4F /* MenuBarContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBarContentView.swift; sourceTree = "<group>"; };
 		4028A97560D06411D88B9AC6 /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
 		409301E4A79963D640B1906D /* PreviewAngleProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewAngleProvider.swift; sourceTree = "<group>"; };
@@ -288,6 +290,7 @@
 			isa = PBXGroup;
 			children = (
 				D01492DF0BAA7A4504425723 /* Assets.xcassets */,
+				3A13CA1E3ED4442C6CB2C4D5 /* Foldy.icns */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -374,6 +377,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3147E878C2A84B392AC64914 /* Assets.xcassets in Resources */,
+				30F5CA52B8A2FA839A037780 /* Foldy.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

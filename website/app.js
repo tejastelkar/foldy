@@ -1,4 +1,4 @@
-// Foldy Web Experience — Advanced Interactive 3D Hinge Kinetics
+// Foldy Web Experience : Advanced Interactive 3D Hinge Kinetics
 
 // Wallpapers SVG Generator
 const Wallpapers = {

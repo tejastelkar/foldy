@@ -37,17 +37,37 @@ else
   /usr/bin/codesign --force --deep --sign - "$app_output"
 fi
 
+staging_dir="$build_root/dmg_staging"
+/bin/rm -rf "$staging_dir"
+/bin/mkdir -p "$staging_dir"
+/usr/bin/ditto "$app_output" "$staging_dir/Foldy.app"
+ln -s /Applications "$staging_dir/Applications"
+
+if [[ -f "$repo_root/Foldy/Resources/Foldy.icns" ]]; then
+  /bin/cp "$repo_root/Foldy/Resources/Foldy.icns" "$staging_dir/.VolumeIcon.icns"
+  /usr/bin/SetFile -a C "$staging_dir" || true
+fi
+
 dmg_output="$build_root/Foldy.dmg"
 zip_output="$build_root/Foldy.zip"
 /bin/rm -f "$dmg_output" "$zip_output"
-if ! /usr/bin/hdiutil create -ov -volname Foldy -srcfolder "$app_output" -format UDZO "$dmg_output"; then
+if ! /usr/bin/hdiutil create -ov -volname Foldy -srcfolder "$staging_dir" -format UDZO "$dmg_output"; then
   print "Disk image service unavailable; creating a ZIP instead."
   /usr/bin/ditto -c -k --sequesterRsrc --keepParent "$app_output" "$zip_output"
 fi
+/bin/rm -rf "$staging_dir"
 
 if [[ -n "${NOTARY_PROFILE:-}" ]]; then
   xcrun notarytool submit "$dmg_output" --keychain-profile "$NOTARY_PROFILE" --wait
   xcrun stapler staple "$dmg_output"
+fi
+
+# Copy built DMG to website and public hub assets
+if [[ -f "$dmg_output" ]]; then
+  /bin/cp "$dmg_output" "$repo_root/website/assets/Foldy.dmg"
+  if [[ -d "/Users/tejastelkar/Desktop/public/assets" ]]; then
+    /bin/cp "$dmg_output" "/Users/tejastelkar/Desktop/public/assets/Foldy.dmg"
+  fi
 fi
 
 print "Built app: $app_output"
