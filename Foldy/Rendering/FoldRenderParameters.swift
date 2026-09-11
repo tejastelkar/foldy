@@ -9,6 +9,7 @@ struct FoldRenderParameters: Equatable, Sendable {
     var shadow: Float
     var styleMode: Float
     var frost: Float
+    var textureStrength: Float
 
     init(state: FoldState, appearance: FoldAppearance, viewportSize: CGSize) {
         progress = Self.normalized(state.progress)
@@ -22,6 +23,11 @@ struct FoldRenderParameters: Equatable, Sendable {
         case .frost: 2
         }
         frost = appearance.style == .frost ? 1 : 0
+        textureStrength = switch appearance.style {
+        case .silk: 0.55
+        case .shade: 0.35
+        case .frost: 1
+        }
 
         let ratio = viewportSize.height > 0 ? viewportSize.width / viewportSize.height : 1
         aspectRatio = ratio.isFinite && ratio > 0 ? Float(ratio) : 1

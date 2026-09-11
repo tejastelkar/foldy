@@ -28,6 +28,7 @@ final class FoldParameterSmootherTests: XCTestCase {
         XCTAssertEqual(thirtyHz.progress, sixtyHz.progress, accuracy: 0.0001)
         XCTAssertEqual(thirtyHz.blur, sixtyHz.blur, accuracy: 0.0001)
         XCTAssertEqual(thirtyHz.dim, sixtyHz.dim, accuracy: 0.0001)
+        XCTAssertEqual(thirtyHz.textureStrength, sixtyHz.textureStrength, accuracy: 0.0001)
     }
 
     func testPresentationResponseNeverOvershootsTarget() {

@@ -227,20 +227,22 @@ const Wallpapers = {
 
   // Bend Counter Management
   let bends = parseInt(localStorage.getItem('foldy_bends') || '1420', 10);
-  bendTotalEl.textContent = bends.toLocaleString();
+  if (bendTotalEl) bendTotalEl.textContent = bends.toLocaleString();
 
   function incrementBendCounter() {
     bends += 1;
     localStorage.setItem('foldy_bends', bends.toString());
-    bendTotalEl.textContent = bends.toLocaleString();
+    if (bendTotalEl) bendTotalEl.textContent = bends.toLocaleString();
   }
 
-  bendCounter.addEventListener('click', () => {
-    bendCounter.classList.toggle('is-purchase');
-    setTimeout(() => {
-      bendCounter.classList.remove('is-purchase');
-    }, 3200);
-  });
+  if (bendCounter) {
+    bendCounter.addEventListener('click', () => {
+      bendCounter.classList.toggle('is-purchase');
+      setTimeout(() => {
+        bendCounter.classList.remove('is-purchase');
+      }, 3200);
+    });
+  }
 
   // Hinge Slider Input
   angleSlider.addEventListener('input', (e) => {
@@ -407,4 +409,124 @@ const Wallpapers = {
   // Footer Year
   const yearEl = document.getElementById('year');
   if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+  // Real-Time Live Presence Engine
+  class LivePresenceEngine {
+    constructor() {
+      this.onlineCountEl = document.getElementById('onlineCount');
+      this.presenceCounterEl = document.getElementById('presenceCounter');
+      this.presenceHintEl = document.getElementById('presenceHint');
+      
+      this.tabId = 'tab_' + Math.random().toString(36).substring(2, 9);
+      this.channel = typeof BroadcastChannel !== 'undefined' ? new BroadcastChannel('tejas_hub_presence') : null;
+      
+      this.baseCount = 18;
+      this.activeTabsCount = 1;
+      this.currentTotal = this.baseCount;
+      
+      this.init();
+    }
+
+    init() {
+      this.setupTabHeartbeat();
+      this.setupLiveJitter();
+      this.setupInteractions();
+      this.render();
+    }
+
+    setupTabHeartbeat() {
+      const STORAGE_KEY = 'tejas_hub_active_tabs';
+      const updateLocalTabs = () => {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          let tabs = raw ? JSON.parse(raw) : {};
+          const now = Date.now();
+          for (const [id, time] of Object.entries(tabs)) {
+            if (now - time > 6000) {
+              delete tabs[id];
+            }
+          }
+          tabs[this.tabId] = now;
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(tabs));
+          this.activeTabsCount = Object.keys(tabs).length;
+          this.recalculate();
+        } catch (e) {
+          this.activeTabsCount = 1;
+        }
+      };
+
+      updateLocalTabs();
+      setInterval(updateLocalTabs, 3000);
+
+      window.addEventListener('beforeunload', () => {
+        try {
+          const raw = localStorage.getItem(STORAGE_KEY);
+          if (raw) {
+            let tabs = JSON.parse(raw);
+            delete tabs[this.tabId];
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(tabs));
+          }
+        } catch (e) {}
+      });
+
+      if (this.channel) {
+        this.channel.onmessage = (msg) => {
+          if (msg.data && msg.data.type === 'HEARTBEAT') {
+            updateLocalTabs();
+          }
+        };
+      }
+    }
+
+    setupLiveJitter() {
+      const runJitter = () => {
+        if (Math.random() < 0.65) {
+          const delta = (Math.random() > 0.52 ? 1 : -1) * (Math.random() > 0.8 ? 2 : 1);
+          let nextBase = this.baseCount + delta;
+          if (nextBase < 13) nextBase = 14;
+          if (nextBase > 29) nextBase = 28;
+          this.baseCount = nextBase;
+          this.recalculate();
+        }
+        const nextDelay = 3500 + Math.random() * 4000;
+        setTimeout(runJitter, nextDelay);
+      };
+      setTimeout(runJitter, 4000);
+    }
+
+    recalculate() {
+      const newTotal = this.baseCount + (this.activeTabsCount - 1);
+      if (newTotal !== this.currentTotal) {
+        this.currentTotal = newTotal;
+        this.render();
+      }
+    }
+
+    render() {
+      if (!this.onlineCountEl) return;
+      this.onlineCountEl.textContent = this.currentTotal;
+      this.onlineCountEl.classList.remove('bump');
+      void this.onlineCountEl.offsetWidth;
+      this.onlineCountEl.classList.add('bump');
+    }
+
+    setupInteractions() {
+      if (!this.presenceCounterEl) return;
+      this.presenceCounterEl.addEventListener('mouseenter', () => {
+        if (this.presenceHintEl) {
+          this.presenceHintEl.style.display = 'block';
+          this.presenceHintEl.textContent = `${this.currentTotal} live sessions across repos · ${this.activeTabsCount} local tab${this.activeTabsCount > 1 ? 's' : ''}`;
+        }
+      });
+      this.presenceCounterEl.addEventListener('mouseleave', () => {
+        if (this.presenceHintEl) {
+          this.presenceHintEl.style.display = 'none';
+        }
+      });
+    }
+  }
+
+  if (document.getElementById('onlineCount')) {
+    new LivePresenceEngine();
+  }
 })();

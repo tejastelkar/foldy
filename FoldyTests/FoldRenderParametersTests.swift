@@ -51,4 +51,19 @@ final class FoldRenderParametersTests: XCTestCase {
         XCTAssertEqual(shade.frost, 0)
         XCTAssertEqual(frost.frost, 1)
     }
+
+    func testEveryStyleCarriesVisibleSurfaceTextureAndFrostIsStrongest() {
+        let state = FoldStateMapper().state(for: 61, previousVisible: true)
+        let viewport = CGSize(width: 1_600, height: 1_000)
+
+        let silk = FoldRenderParameters(state: state, appearance: .silk, viewportSize: viewport)
+        let shade = FoldRenderParameters(state: state, appearance: .shade, viewportSize: viewport)
+        let frost = FoldRenderParameters(state: state, appearance: .frost, viewportSize: viewport)
+
+        XCTAssertGreaterThanOrEqual(silk.textureStrength, 0.5)
+        XCTAssertGreaterThanOrEqual(shade.textureStrength, 0.3)
+        XCTAssertEqual(frost.textureStrength, 1, accuracy: 0.0001)
+        XCTAssertGreaterThan(frost.textureStrength, silk.textureStrength)
+        XCTAssertGreaterThan(silk.textureStrength, shade.textureStrength)
+    }
 }

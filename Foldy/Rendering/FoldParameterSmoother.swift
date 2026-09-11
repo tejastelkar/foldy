@@ -21,6 +21,7 @@ struct FoldParameterSmoother: Sendable {
         value.blur += (target.blur - value.blur) * amount
         value.dim += (target.dim - value.dim) * amount
         value.shadow += (target.shadow - value.shadow) * amount
+        value.textureStrength += (target.textureStrength - value.textureStrength) * amount
         value.aspectRatio = target.aspectRatio
         value.styleMode = target.styleMode
         value.frost = target.frost

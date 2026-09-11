@@ -15,6 +15,7 @@ struct FoldRenderParameters {
     float shadow;
     float styleMode;
     float frost;
+    float textureStrength;
 };
 
 vertex VertexOut foldVertex(uint vertexID [[vertex_id]]) {
@@ -94,8 +95,15 @@ fragment float4 foldFragment(
     float roll = sin(localY * M_PI_F) * 0.009 * p * parameters.perspective;
     panelUV.y += roll * depth;
 
-    // Five fixed samples replace the previous 13–15 tap bokeh kernel.
-    float blurRadius = parameters.blur * p * (0.0012 + 0.0068 * depth);
+    // The material profile stays present in every style and becomes strongest in Frost.
+    // It grows with the physical bend instead of appearing as a static screen filter.
+    float material = clamp(parameters.textureStrength, 0.0, 1.0) * smoothstep(0.025, 0.72, p);
+
+    // Five fixed samples keep the wider diffusion smooth without returning to the
+    // previous expensive 13–15 tap kernel.
+    float opticalBlur = parameters.blur * p * (0.0012 + 0.0068 * depth);
+    float materialBlur = material * p * (0.0040 + 0.0200 * depth);
+    float blurRadius = max(opticalBlur, materialBlur);
     float2 vertical = float2(0.0, blurRadius);
     float2 horizontal = float2(blurRadius * 0.42 / aspect, 0.0);
     float4 color = screenTexture.sample(screenSampler, panelUV) * 0.36;
@@ -105,13 +113,22 @@ fragment float4 foldFragment(
     color += screenTexture.sample(screenSampler, panelUV - horizontal) * 0.14;
 
     float luminance = dot(color.rgb, float3(0.2126, 0.7152, 0.0722));
-    float frostStrength = parameters.frost * p;
-    color.rgb = mix(color.rgb, float3(luminance), frostStrength * 0.16);
-    color.rgb = mix(color.rgb, float3(0.68, 0.82, 1.0), frostStrength * (0.08 + depth * 0.10));
+    float frostStrength = material * mix(0.82, 1.0, parameters.frost);
+    color.rgb = mix(color.rgb, float3(luminance), frostStrength * 0.30);
+
+    // Broad cold-white diffusion creates the milky, fabric-like depth visible in
+    // the reference while retaining enough desktop detail to feel translucent.
+    float veil = frostStrength * (0.24 + 0.46 * depth) * smoothstep(0.02, 0.65, p);
+    float3 veilColor = mix(float3(0.84, 0.88, 0.94), float3(0.57, 0.64, 0.74), depth);
+    color.rgb = mix(color.rgb, veilColor, clamp(veil, 0.0, 0.72));
+
+    float softBands = sin(panelUV.y * 34.0 + sin(panelUV.x * 9.0) * 1.7);
+    softBands += sin(panelUV.x * 23.0 - panelUV.y * 12.0) * 0.45;
+    color.rgb += softBands * frostStrength * p * 0.014;
 
     // Duo-inspired blue/violet refraction and a soft traveling silk highlight.
     float3 blueEdge = mix(float3(0.20, 0.56, 1.0), float3(0.48, 0.34, 1.0), panelUV.x);
-    float refraction = depth * depth * p * (0.045 + 0.08 * parameters.perspective);
+    float refraction = depth * depth * p * (0.025 + 0.055 * parameters.perspective);
     color.rgb += blueEdge * refraction;
 
     float sweepPosition = panelUV.x * 0.34 + panelUV.y - (0.20 + eased * 0.46);
@@ -120,7 +137,10 @@ fragment float4 foldFragment(
 
     // Fine stable grain gives the closing surface a physical glass texture.
     float grain = materialNoise(panelUV);
-    color.rgb += grain * p * (0.010 + frostStrength * 0.022) * (0.35 + 0.65 * depth);
+    color.rgb += grain * p * (0.012 + frostStrength * 0.032) * (0.35 + 0.65 * depth);
+
+    float edgeHaze = 1.0 - smoothstep(0.0, 0.16, edgeDistance);
+    color.rgb += veilColor * edgeHaze * frostStrength * p * 0.075;
 
     float topRim = exp2(-localY * localY * 1400.0) * p;
     color.rgb += float3(0.78, 0.90, 1.0) * topRim * (0.10 + parameters.shadow * 0.08);
